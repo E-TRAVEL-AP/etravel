@@ -1,2 +1,2 @@
 # etravel
-Project-2 for Advanced Proggramming course
+Project-2 for Advanced Programming course
