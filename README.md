@@ -1,12 +1,12 @@
-# etravel
-Etravel is a Django project forfor Advanced Programming course.
+# Etravel
+Etravel is a Django project created for Advanced Programming course.
 
 ## Installation
 
 Coming Soon
 
 ```bash
-pip install django
+python -m pip install Django
 ```
 
 ## 3rd Party Library
@@ -20,6 +20,12 @@ pip install django
 * [jQuery.scrollTo](https://github.com/flesler/jquery.scrollTo)
 * [Popper.js](https://popper.js.org/)
 * [Single-Page-Nav.js](https://github.com/ChrisWojcik/single-page-nav)
+
+## References
+
+
+
+## Requirements
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
