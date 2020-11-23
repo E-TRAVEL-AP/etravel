@@ -5,7 +5,8 @@ from django.dispatch import receiver
 from django.forms import ModelForm
 #from star_ratings.models import Rating
 
-# Create your models here.
+#######################################################################################################################################
+
 class Hotel(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, null=True)
@@ -31,6 +32,8 @@ class Hotel(models.Model):
 
 #Hotel.objects.filter(ratings__isnull=False).order_by('ratings__average')
 
+#######################################################################################################################################
+
 class Room(models.Model):
     room_number = models.IntegerField(null=False, blank=False, default=0)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
@@ -51,14 +54,16 @@ class Room(models.Model):
 
     def __str__(self):
         return (f'{self.hotel}-{self.room_number}')
-    
+
+ #######################################################################################################################################
+
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     comment = models.CharField(max_length=5000, null=True)
     #rating = 
 
-
+#######################################################################################################################################
 
 class Reservation(models.Model):
     reservation_id = models.IntegerField(null=False, blank=False, default=0)

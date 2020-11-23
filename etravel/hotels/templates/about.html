@@ -1,10 +1,90 @@
-{% extends 'main.html' %}
-{% load static %}
-{% block content %}
-<div class = container>
-	<div class="row justify-content-md-center">
-        <h1> About Our Site!</h1>
-	</div>
-</div>
 
-{% endblock content %}
+{% load static %} {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/project2.css' %}"
+    />
+<!--   Parallax Image   -->
+<div id="homepage" class="customContainer">
+		<div class="customContainer-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-push-5">
+						<div class="homepageHeading">
+							<h1 classe="homepageHeadingtext"><div style="font-size:65px; font-family: 'Verdana', sans-serif; ">Getaway</div> <div style = "margin-left:26px;">in the times of <br> Pandemic</div></h1>
+							<p>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-6 col-md-pull-7">
+						<div class="homepage-form">
+
+
+            <!-- =========================== Bootstrap Form=============================-->
+
+							<form>
+								<div class="form-group">
+									<span class="form-label">Your Destination</span>
+									<input class="form-control" type="text" placeholder="Enter a destination or hotel name">
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<span class="form-label">Check In</span>
+											<input class="form-control" type="date" required>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<span class="form-label">Check out</span>
+											<input class="form-control" type="date" required>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									
+									<div class="col-sm-6">
+										<div class="form-group">
+											<span class="form-label">Adults</span>
+											<select class="form-control">
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<span class="form-label">Children</span>
+											<select class="form-control">
+												<option>0</option>
+												<option>1</option>
+												<option>2</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+								</div>
+								<div class="form-btn">
+                <center>
+									<button class="submit-button d-flex justify-content-center">Submit</button>
+                </center>
+								</div>
+							</form>
+
+              <!-- =========================== Bootstrap Form ENDS=============================-->
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+      {% endblock content %}
+    </div>
+  </div>
+</div>

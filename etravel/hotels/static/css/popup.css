@@ -1,0 +1,83 @@
+li:hover{
+    background-color: #bbb;
+}
+
+#myTable{
+  right: 20px;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+}
+
+#product_view{
+  position: sticky;
+  z-index: 1;
+} 
+.popup .overlay {
+    position: fixed;
+    top:100px;
+    left:0px;
+    width:100vw;
+    height:100vh;
+    
+    z-index:1;
+    display:none;
+    
+} 
+ .popup .content {
+     position:absolute;
+     top:50%;
+     left:50%;
+     transform: translate(-50%, -50%) scale(0);
+     background:#fff;
+     width: 750px;
+     height: 520px;
+     z-index:2;
+     text-align: left;
+     padding:20px;
+     box-sizing: border-box;
+     box-shadow:rgb(124, 124, 124) 10px 10px 50px;
+
+ }
+
+ .popup .close-btn {
+     cursor: pointer;
+     position:absolute;
+     right:20px;
+     top:20px;
+     width:30px;
+     height:30px;
+     box-shadow: #666;
+     color: #000;
+     font-size:25px;
+     font-weight:600;
+     line-height:30px;
+     text-align:center;
+     border-radius:50%;
+
+ }
+
+.popup.active .overlay {
+    display:block;   
+}
+
+.popup.active .content {
+position:fixed;
+transition: all 300ms ease-in-out;
+transform:translate(-50%,-50%) scale(1); 
+}
+
+#popup_description {
+    top:80px;
+    padding:20px;
+
+}
+
+#popup_buttons {
+    float: center;
+    padding:20px;
+}
+#popup_price {
+float: left;
+padding:20px;
+}
