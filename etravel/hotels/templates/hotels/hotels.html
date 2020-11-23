@@ -1,0 +1,87 @@
+{% extends "hotels/main.html" %} {% load static %} {% block content %}
+
+<!-- =========================== Bootstrap Form=============================-->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form class="form_book">
+          <div class="row">
+          
+
+
+
+
+          <div class="col-md-3">
+              <label class="date">Your Destination</label>
+              <input class="book_n" type="text" placeholder="Enter a destination or hotel name" />
+            </div>
+            
+
+
+
+            <div class="col-md-3">
+              <label class="date">ARRIVAL DATE</label>
+              <input class="book_n" type="date" />
+            </div>
+            <div class="col-md-3">
+              <label class="date">DEPARTURE DATE</label>
+              <input class="book_n" type="date" />
+            </div>
+            
+            <div class="col-md-3">
+              <button class="book_btn">Book Now</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- =========================== Bootstrap Form ENDS=============================-->
+
+
+   <div class="container" id = "hotelsboxes">
+    <div class="paddingsbottom">
+      {% for hotel in hotels %} {% if hotel.continent == "northamerica" %}
+
+      <div class="hoteladjusting">
+        <img
+          src="../../static/images/hotel1.jpg"
+          alt="Image"
+          style="width:400px;"
+        />
+        <div class="hotelDescription">
+          <h3 class="hotelname">{{hotel.name}}</h3>
+          <p >{{hotel.location}}</p>
+          <p >
+            This hotel follow covid safe procedure.
+          </p>
+          <span class="badge badge-info">Covid Safe</span>
+          <span class="badge badge-dark">AC</span>
+          <span class="badge badge-success">liesure</span>
+        </div>
+        <a href="#" class="pricecontainer pricecontainer2 pricecontainer3" style="text-decoration: none !important;";>
+          <p style="color: #f8f8f8;
+  font-size: 1.6rem;
+  font-weight: 600;">Rs.{{hotel.price}}</p>
+          <p style="color: #f8f8f8;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;">Book</p>
+        </a>
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+</div>
+  </div>
+  </div>
+
+
+
+
+  
+  
+
+  {%endblock content %}
+

@@ -11,6 +11,7 @@ from django.conf import settings
 from django.core.mail import send_mail 
 from django.contrib.auth.models import User
 import random
+from . import fakeHotels
 
 #######################################################################################################################################
 
@@ -18,6 +19,23 @@ def homepage(request):
     return render(request, 'hotels/homepage.html')
 
 #######################################################################################################################################
+
+#######################################################################################################################################
+
+def hotels(request):
+    hotels = fakeHotels.hotels
+    return render(request, 'hotels/hotels.html', {'hotels': hotels})
+
+#######################################################################################################################################
+
+#######################################################################################################################################
+
+def flights(request):
+    hotels = fakeHotels.hotels
+    return render(request, 'hotels/flights.html', {'hotels': hotels})
+
+#######################################################################################################################################
+
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=20, help_text='Enter your first name')

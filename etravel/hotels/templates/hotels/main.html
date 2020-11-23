@@ -3,16 +3,20 @@
 <html>
   <head>
     <title>E travel Website</title>
-    <meta charset="UTF-8" />
-    <meta name="theme-color" content="#ffffff" />
-
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+
     <link
       rel="stylesheet"
       type="text/css"
       href="{% static 'css/project2.css' %}"
     />
 
+    <!-- Font Awesome for icons
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  -->
     <link
       rel="stylesheet"
       type="text/css"
@@ -28,7 +32,8 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
     <script type="text/javascript">
       var user = "{{request.user}}";
@@ -60,7 +65,7 @@
       id="navigationCustom"
       class="navbar navbar-expand-lg navbar-light bg-light"
     >
-      <a id="logo" class="navbar-brand" href="#">Getaway</a>
+      <a id="logo" class="navbar-brand" href="/">Getaway</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -73,16 +78,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div
-        class="collapse navbar-collapse"
-        id="myNavbar"
-        id="navbarSupportedContent"
-      >
-        <ul class="navbar-nav mr-auto" id="link">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#"
+            <a class="nav-link" href="/hotels"
               >Hotels <span class="sr-only">(current)</span></a
             >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/flights">Flights</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">About Us</a>
@@ -97,10 +101,27 @@
           <li id="button-link" class="nav-item">
             <a class="nav-link" href="#">Sign Up</a>
           </li>
+          <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li> -->
         </ul>
+        <!-- form wrapper -->
       </div>
     </nav>
-    <!-- ========== NAVBAR ENDS HERE ==========-->
 
     {% block content %} {% endblock content %}
 
