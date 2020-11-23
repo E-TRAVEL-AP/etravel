@@ -1,0 +1,454 @@
+{% extends "hotels/base.html" %} {% block content %}
+
+<div class="tm-page-wrap mx-auto">
+  <section class="tm-banner">
+    <div class="tm-container-outer tm-banner-bg">
+      <div class="container">
+        <div class="row tm-banner-row tm-banner-row-header">
+          <div class="col-xs-12">
+            <div class="tm-banner-header">
+              <h1 class="text-uppercase tm-banner-title">{{xxx.brand}}</h1>
+              <img src="static/img/dots-3.png" alt="Dots" />
+              <p class="tm-banner-subtitle">
+                Safest place during the Pandemic.
+              </p>
+              <a href="javascript:void(0)" class="tm-down-arrow-link"
+                ><i class="fa fa-2x fa-angle-down tm-down-arrow"></i
+              ></a>
+            </div>
+          </div>
+          <!-- col-xs-12 -->
+        </div>
+        <!-- row -->
+        <div class="row tm-banner-row" id="tm-section-search">
+          <form
+            action="index.html"
+            method="get"
+            class="tm-search-form tm-section-pad-2"
+          >
+            <div class="form-row tm-search-form-row">
+              <div
+                class="form-group tm-form-group tm-form-group-pad tm-form-group-1"
+              >
+                <label for="inputCity">Choose Your Destination</label>
+                <input
+                  name="destination"
+                  type="text"
+                  class="form-control"
+                  id="inputCity"
+                  placeholder="Type your destination..."
+                />
+              </div>
+              <div class="form-group tm-form-group tm-form-group-1">
+                <div
+                  class="form-group tm-form-group tm-form-group-pad tm-form-group-2"
+                >
+                  <label for="inputRoom">How many rooms?</label>
+                  <select
+                    name="room"
+                    class="form-control tm-select"
+                    id="inputRoom"
+                  >
+                    <option value="1" selected>1 Room</option>
+                    <option value="2">2 Rooms</option>
+                    <option value="3">3 Rooms</option>
+                    <option value="4">4 Rooms</option>
+                    <option value="5">5 Rooms</option>
+                    <option value="6">6 Rooms</option>
+                    <option value="7">7 Rooms</option>
+                    <option value="8">8 Rooms</option>
+                    <option value="9">9 Rooms</option>
+                    <option value="10">10 Rooms</option>
+                  </select>
+                </div>
+                <div
+                  class="form-group tm-form-group tm-form-group-pad tm-form-group-3"
+                >
+                  <label for="inputAdult">Adult</label>
+                  <select
+                    name="adult"
+                    class="form-control tm-select"
+                    id="inputAdult"
+                  >
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                </div>
+                <div
+                  class="form-group tm-form-group tm-form-group-pad tm-form-group-3"
+                >
+                  <label for="inputChildren">Children</label>
+                  <select
+                    name="children"
+                    class="form-control tm-select"
+                    id="inputChildren"
+                  >
+                    <option value="0" selected>0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- form-row -->
+            <div class="form-row tm-search-form-row">
+              <div
+                class="form-group tm-form-group tm-form-group-pad tm-form-group-3"
+              >
+                <label for="inputCheckIn">Check In Date</label>
+                <input
+                  name="check-in"
+                  type="text"
+                  class="form-control"
+                  id="inputCheckIn"
+                  placeholder="Check In"
+                />
+              </div>
+              <div
+                class="form-group tm-form-group tm-form-group-pad tm-form-group-3"
+              >
+                <label for="inputCheckOut">Check Out Date</label>
+                <input
+                  name="check-out"
+                  type="text"
+                  class="form-control"
+                  id="inputCheckOut"
+                  placeholder="Check Out"
+                />
+              </div>
+              <div
+                class="form-group tm-form-group tm-form-group-pad tm-form-group-1"
+              >
+                <label for="btnSubmit">&nbsp;</label>
+                <button
+                  type="submit"
+                  class="btn btn-primary tm-btn tm-btn-search text-uppercase"
+                  id="btnSubmit"
+                >
+                  Check Availability
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- row -->
+        <div class="tm-banner-overlay"></div>
+      </div>
+      <!-- .container -->
+    </div>
+    <!-- .tm-container-outer -->
+  </section>
+
+  <div class="tm-container-outer" id="tm-section-2"></div>
+  <div class="tm-container-outer" id="tm-section-3">
+    <ul class="nav nav-pills tm-tabs-links">
+      <li class="tm-tab-link-li">
+        <a href="#1a" data-toggle="tab" class="tm-tab-link">
+          <img
+            src="static/img/north-america.png"
+            alt="Image"
+            class="img-fluid"
+          />
+          North America
+        </a>
+      </li>
+      <li class="tm-tab-link-li">
+        <a href="#2a" data-toggle="tab" class="tm-tab-link">
+          <img
+            src="static/img/south-america.png"
+            alt="Image"
+            class="img-fluid"
+          />
+          South America
+        </a>
+      </li>
+      <li class="tm-tab-link-li">
+        <a href="#3a" data-toggle="tab" class="tm-tab-link">
+          <img src="static/img/europe.png" alt="Image" class="img-fluid" />
+          Europe
+        </a>
+      </li>
+      <li class="tm-tab-link-li">
+        <a href="#4a" data-toggle="tab" class="tm-tab-link active"
+          ><!-- Current Active Tab -->
+          <img src="static/img/asia.png" alt="Image" class="img-fluid" />
+          Asia
+        </a>
+      </li>
+      <li class="tm-tab-link-li">
+        <a href="#5a" data-toggle="tab" class="tm-tab-link">
+          <img src="static/img/africa.png" alt="Image" class="img-fluid" />
+          Africa
+        </a>
+      </li>
+      <li class="tm-tab-link-li">
+        <a href="#6a" data-toggle="tab" class="tm-tab-link">
+          <img src="static/img/australia.png" alt="Image" class="img-fluid" />
+          Australia
+        </a>
+      </li>
+      <li class="tm-tab-link-li">
+        <a href="#7a" data-toggle="tab" class="tm-tab-link">
+          <img src="static/img/antartica.png" alt="Image" class="img-fluid" />
+          Antartica
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content clearfix">
+      <!-- Tab 1 -->
+      <div class="tab-pane fade" id="1a">
+        <div class="tm-recommended-place-wrap">
+          {% for hotel in hotels %} {% if hotel.continent == "northamerica" %}
+
+          <div class="tm-recommended-place">
+            <img
+              src="static/img/hotel2.jpg"
+              alt="Image"
+              class="img-fluid tm-recommended-img"
+            />
+            <div class="tm-recommended-description-box">
+              <h3 class="tm-recommended-title">{{hotel.name}}</h3>
+              <p class="tm-text-highlight">{{hotel.location}}</p>
+              <p class="tm-text-gray">
+                Sed egestas, odio nec bibendum mattis, quam odio hendrerit
+                risus, eu varius eros lacus sit amet lectus. Donec blandit
+                luctus dictum...
+              </p>
+            </div>
+            <a href="#" class="tm-recommended-price-box">
+              <p class="tm-recommended-price">${{hotel.price}}</p>
+              <p class="tm-recommended-price-link">Continue Reading</p>
+            </a>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+
+        <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table"
+          >Show More Places</a
+        >
+      </div>
+      <!-- tab-pane -->
+
+      <!-- Tab 2 -->
+      <div class="tab-pane fade" id="2a">
+        <div class="tm-recommended-place-wrap">
+          {% for hotel in hotels %} {% if hotel.continent == "southamerica" %}
+
+          <div class="tm-recommended-place">
+            <img
+              src="static/img/hotel1.jpg"
+              alt="Image"
+              class="img-fluid tm-recommended-img"
+            />
+            <div class="tm-recommended-description-box">
+              <h3 class="tm-recommended-title">{{hotel.name}}</h3>
+              <p class="tm-text-highlight">{{hotel.location}}</p>
+              <p class="tm-text-gray">
+                Sed egestas, odio nec bibendum mattis, quam odio hendrerit
+                risus, eu varius eros lacus sit amet lectus. Donec blandit
+                luctus dictum...
+              </p>
+            </div>
+            <a href="#" class="tm-recommended-price-box">
+              <p class="tm-recommended-price">${{hotel.price}}</p>
+              <p class="tm-recommended-price-link">Continue Reading</p>
+            </a>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+
+        <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table"
+          >Show More Places</a
+        >
+      </div>
+      <!-- tab-pane -->
+
+      <!-- Tab 3 -->
+      <div class="tab-pane fade" id="3a">
+        <div class="tm-recommended-place-wrap">
+          {% for hotel in hotels %} {% if hotel.continent == "europe" %}
+
+          <div class="tm-recommended-place">
+            <img
+              src="static/img/hotel3.jpg"
+              alt="Image"
+              class="img-fluid tm-recommended-img"
+            />
+            <div class="tm-recommended-description-box">
+              <h3 class="tm-recommended-title">{{hotel.name}}</h3>
+              <p class="tm-text-highlight">{{hotel.location}}</p>
+              <p class="tm-text-gray">
+                Sed egestas, odio nec bibendum mattis, quam odio hendrerit
+                risus, eu varius eros lacus sit amet lectus. Donec blandit
+                luctus dictum...
+              </p>
+            </div>
+            <a href="#" class="tm-recommended-price-box">
+              <p class="tm-recommended-price">${{hotel.price}}</p>
+              <p class="tm-recommended-price-link">Continue Reading</p>
+            </a>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+
+        <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table"
+          >Show More Places</a
+        >
+      </div>
+      <!-- tab-pane -->
+
+      <!-- Tab 4 -->
+      <div class="tab-pane fade show active" id="4a">
+        <!-- Current Active Tab WITH "show active" classes in DIV tag -->
+        <div class="tm-recommended-place-wrap">
+          {% for hotel in hotels %} {% if hotel.continent == "asia" %}
+
+          <div class="tm-recommended-place">
+            <img
+              src="static/img/hotel4.jpg"
+              alt="Image"
+              class="img-fluid tm-recommended-img"
+            />
+            <div class="tm-recommended-description-box">
+              <h3 class="tm-recommended-title">{{hotel.name}}</h3>
+              <p class="tm-text-highlight">{{hotel.location}}</p>
+              <p class="tm-text-gray">
+                Sed egestas, odio nec bibendum mattis, quam odio hendrerit
+                risus, eu varius eros lacus sit amet lectus. Donec blandit
+                luctus dictum...
+              </p>
+            </div>
+            <a href="#" class="tm-recommended-price-box">
+              <p class="tm-recommended-price">${{hotel.price}}</p>
+              <p class="tm-recommended-price-link">Continue Reading</p>
+            </a>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+
+        <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table"
+          >Show More Places</a
+        >
+      </div>
+      <!-- tab-pane -->
+
+      <!-- Tab 5 -->
+      <div class="tab-pane fade" id="5a">
+        <div class="tm-recommended-place-wrap">
+          {% for hotel in hotels %} {% if hotel.continent == "africa" %}
+
+          <div class="tm-recommended-place">
+            <img
+              src="static/img/hotel1.jpg"
+              alt="Image"
+              class="img-fluid tm-recommended-img"
+            />
+            <div class="tm-recommended-description-box">
+              <h3 class="tm-recommended-title">{{hotel.name}}</h3>
+              <p class="tm-text-highlight">{{hotel.location}}</p>
+              <p class="tm-text-gray">
+                Sed egestas, odio nec bibendum mattis, quam odio hendrerit
+                risus, eu varius eros lacus sit amet lectus. Donec blandit
+                luctus dictum...
+              </p>
+            </div>
+            <a href="#" class="tm-recommended-price-box">
+              <p class="tm-recommended-price">${{hotel.price}}</p>
+              <p class="tm-recommended-price-link">Continue Reading</p>
+            </a>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+
+        <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table"
+          >Show More Places</a
+        >
+      </div>
+      <!-- tab-pane -->
+
+      <!-- Tab 6 -->
+      <div class="tab-pane fade" id="6a">
+        <div class="tm-recommended-place-wrap">
+          {% for hotel in hotels %} {% if hotel.continent == "australia" %}
+
+          <div class="tm-recommended-place">
+            <img
+              src="static/img/hotel2.jpg"
+              alt="Image"
+              class="img-fluid tm-recommended-img"
+            />
+            <div class="tm-recommended-description-box">
+              <h3 class="tm-recommended-title">{{hotel.name}}</h3>
+              <p class="tm-text-highlight">{{hotel.location}}</p>
+              <p class="tm-text-gray">
+                Sed egestas, odio nec bibendum mattis, quam odio hendrerit
+                risus, eu varius eros lacus sit amet lectus. Donec blandit
+                luctus dictum...
+              </p>
+            </div>
+            <a href="#" class="tm-recommended-price-box">
+              <p class="tm-recommended-price">${{hotel.price}}</p>
+              <p class="tm-recommended-price-link">Continue Reading</p>
+            </a>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+
+        <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table"
+          >Show More Places</a
+        >
+      </div>
+      <!-- tab-pane -->
+
+      <!-- Tab 7 -->
+      <div class="tab-pane fade" id="7a">
+        <div class="tm-recommended-place-wrap">
+          {% for hotel in hotels %} {% if hotel.continent == "antartica" %}
+
+          <div class="tm-recommended-place">
+            <img
+              src="static/img/hotel2.jpg"
+              alt="Image"
+              class="img-fluid tm-recommended-img"
+            />
+            <div class="tm-recommended-description-box">
+              <h3 class="tm-recommended-title">{{hotel.name}}</h3>
+              <p class="tm-text-highlight">{{hotel.location}}</p>
+              <p class="tm-text-gray">
+                Sed egestas, odio nec bibendum mattis, quam odio hendrerit
+                risus, eu varius eros lacus sit amet lectus. Donec blandit
+                luctus dictum...
+              </p>
+            </div>
+            <a href="#" class="tm-recommended-price-box">
+              <p class="tm-recommended-price">${{hotel.price}}</p>
+              <p class="tm-recommended-price-link">Continue Reading</p>
+            </a>
+          </div>
+          {% endif %} {% endfor %}
+        </div>
+
+        <a href="#" class="text-uppercase btn-primary tm-btn mx-auto tm-d-table"
+          >Show More Places</a
+        >
+      </div>
+      <!-- tab-pane -->
+    </div>
+  </div>
+</div>
+{% endblock content %}
