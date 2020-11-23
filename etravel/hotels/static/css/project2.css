@@ -81,3 +81,48 @@
   border: 0;
   cursor: pointer;
 }
+
+#navigationCustom {
+  border-radius: 0px;
+  background: #f8f8f8;
+  padding: 20px;
+  font-size: 17.5px;
+}
+/* logo or main heading */
+#logo {
+  font-size: 21px;
+  font-weight: bolder;
+  color: #00004d;
+  letter-spacing: 2px;
+  margin-left: 3%;
+  margin-right: 2%;
+}
+
+#link a {
+  color: #01325d;
+  margin: 1px 20px 0 10px;
+  letter-spacing: 1.5px;
+}
+
+/* sign up link button and toggle button */
+#button-link {
+  color: #f2f2f2;
+  border-style: solid;
+  font-size: inherit !important;
+
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background-color: #fa6a48;
+  padding-left: 10px;
+}
+#button-link a {
+  color: #f2f2f2;
+  text-decoration: none;
+}
+
+.nav-item:focus,
+.nav-item:hover {
+  text-decoration: none;
+  background-color: #f8f8f8;
+}
