@@ -1,0 +1,167 @@
+{% extends "hotels/main.html" %} {% load static %} {% block content %}
+
+<!--   This page contain the homepage hotel search   -->
+<div id="homepage" class="customContainer">
+  <div class="customContainer-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-push-5">
+          <div class="homepageHeading">
+            <h1 classe="homepageHeadingtext" style="color: #f8f8f8">
+              <div style="font-size: 65px; font-family: 'Verdana', sans-serif">
+                Getaway
+              </div>
+              <div style="margin-left: 26px">
+                in the times of <br />
+                Pandemic
+              </div>
+            </h1>
+            <p></p>
+          </div>
+        </div>
+        <div class="col-md-6 col-md-pull-7">
+          <div class="homepage-form">
+            <!-- =========================== Bootstrap Form=============================-->
+
+            
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">Hotels</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Flights</a>
+    </li>
+   
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+      <form>
+              <div class="form-group">
+                <span class="form-label">Your Destination</span>
+                <input
+                  class="book_n"
+                  type="text"
+                  placeholder="Enter a destination or hotel name"
+                />
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Check In</span>
+                    <input class="book_n" type="date" required />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Check out</span>
+                    <input class="book_n" type="date" required />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Adults</span>
+                    <select class="book_n">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Children</span>
+                    <select class="book_n">
+                      <option>0</option>
+                      <option>1</option>
+                      <option>2</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-btn">
+                <center>
+                  <button class="book_btn">Search</button>
+                </center>
+              </div>
+            </form>
+    </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+      
+	  <form>
+              <div class="row">
+          <div class="col-md-6">
+              <label class="date">From</label>
+              <input class="book_n" type="text" placeholder="Enter a place of origin" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="date">Destination</label>
+              <input class="book_n" type="text" placeholder="Enter a destination" />
+            </div>
+            </div>
+              <div class="row" style="padding-top:20px;">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Check In</span>
+                    <input class="book_n" type="date" required />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Check out</span>
+                    <input class="book_n" type="date" required />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Adults</span>
+                    <select class="book_n">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <span class="form-label">Children</span>
+                    <select class="book_n">
+                      <option>0</option>
+                      <option>1</option>
+                      <option>2</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-btn">
+                <center>
+                  <button class="book_btn">Search</button>
+                </center>
+              </div>
+            </form>
+	  
+	  </div>
+    
+  </div>
+</div>
+
+            <!-- =========================== Bootstrap Form ENDS=============================-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
