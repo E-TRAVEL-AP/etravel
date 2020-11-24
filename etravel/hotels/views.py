@@ -12,6 +12,11 @@ from django.core.mail import send_mail
 from django.contrib.auth.models import User
 import random
 from . import fakeHotels
+#For API
+from amadeus import Client, ResponseError
+import json
+from datetime import datetime
+
 
 #######################################################################################################################################
 
@@ -35,6 +40,154 @@ def flights(request):
     return render(request, 'hotels/flights.html', {'hotels': hotels})
 
 #######################################################################################################################################
+
+
+#######################################################################################################################################
+amadeus = Client(client_id='t7HkaagNkZgxjG30TXfpjtmWQKRXO0U3', 
+                 client_secret='w4PbnQiOa0XV3gQt')
+
+
+
+def prediction(request): 
+
+    origin = request.POST.get('Origin')
+    destination = request.POST.get('Destination')
+    departureDate = request.POST.get('Departuredate')
+    returnDate = request.POST.get('Returndate')
+    adults = request.POST.get('Adults')
+
+    if not adults:
+        adults = 1
+
+    kwargs = {'originLocationCode': origin,
+              'destinationLocationCode': destination,
+              'departureDate': departureDate,
+              'adults': adults
+              }
+
+    
+
+    if origin and destination and departureDate:
+        try:
+            response = amadeus.shopping.flight_offers_search.get(**kwargs)
+            flightsjason = response.data
+            
+            
+        except ResponseError as error:
+            messages.add_message(request, messages.ERROR, error)
+            
+        
+    flightResults = []
+
+
+    for flight in flightsjason:
+
+        price = flight['price']['total']
+        print("Price:", price)
+        flightID = flight['id']
+        searchedFlight = []
+
+        
+        index = 0
+        for itinaties in flight['itineraries']:
+
+            if len(flight['itineraries'][index]['segments']) == 2:
+
+                firstFlightDepartureAirport = flight['itineraries'][index]['segments'][0]['departure']['iataCode']
+                
+                firstFlightAirline = flight['itineraries'][index]['segments'][0]['carrierCode']
+                firstFlightDepartureDate = get_hour(flight['itineraries'][index]['segments'][0]['departure']['at'])
+                firstFlightArrivalAirport = flight['itineraries'][index]['segments'][0]['arrival']['iataCode']
+                firstFlightArrivalDate = get_hour(flight['itineraries'][index]['segments'][0]['arrival']['at'])
+                firstFlightArrivalDuration = flight['itineraries'][index]['segments'][0]['duration']
+                secondFlightDepartureAirport = flight['itineraries'][index]['segments'][1]['departure']['iataCode']
+                secondFlightDepartureDate = get_hour(flight['itineraries'][index]['segments'][1]['departure']['at'])
+                
+                secondFlightAirline = flight['itineraries'][index]['segments'][1]['carrierCode']
+                secondFlightArrivalAirport = flight['itineraries'][index]['segments'][1]['arrival']['iataCode']
+                secondFlightArrivalDate = get_hour(flight['itineraries'][index]['segments'][1]['arrival']['at'])
+                secondFlightArrivalDuration = flight['itineraries'][index]['segments'][1]['duration']
+                FlightTotalDuration = flight['itineraries'][index]['duration'][2:]
+
+                print("FlightTotalDuration: ",FlightTotalDuration)
+                
+                
+            elif len(flight['itineraries'][index]['segments']) == 1:
+
+                firstFlightDepartureAirport = flight['itineraries'][index]['segments'][0]['departure']['iataCode']
+                
+                firstFlightAirline = flight['itineraries'][index]['segments'][0]['carrierCode']
+                firstFlightDepartureDate = get_hour(flight['itineraries'][index]['segments'][0]['departure']['at'])
+                
+                firstFlightArrivalAirport = flight['itineraries'][index]['segments'][0]['arrival']['iataCode']
+                firstFlightArrivalDate = get_hour(flight['itineraries'][index]['segments'][0]['arrival']['at'])
+                firstFlightArrivalDuration = flight['itineraries'][index]['segments'][0]['duration']
+                FlightTotalDuration = flight['itineraries'][index]['duration'][2:]
+            index += 1
+        
+        
+        print(searchedFlight)
+        
+        # for flight in flight_offers.data:
+        #     offer = Flight(flight).construct_flights()
+        #     flights_offers_returned.append(offer)
+
+        # prediction_flights_returned = []
+        # for flight in prediction_flights.data:
+        #     offer = Flight(flight).construct_flights()
+        #     prediction_flights_returned.append(offer)
+
+        # return render(request, 'hotels/test.html', {'response': flights_offers_returned,
+        #                                              
+        #                                              'origin': origin,
+        #                                              'destination': destination,
+        #                                              'departureDate': departureDate,
+        #                                              'returnDate': returnDate,
+                                                     
+        #                                              })
+    
+    # try:
+    #     response = amadeus.shopping.flight_offers_search.get(originLocationCode='SYD', destinationLocationCode='BKK', departureDate='2021-04-01', adults=1)
+    #     flightsjason = response.data
+
+    #     bookableTicket = flightsjason[0]['numberOfBookableSeats']
+        
+    #     departureTime = []
+    #     duration = []
+    #     arrivalTime = []
+    #     carrierCode = []
+    #     price = []
+
+    #     for i in range(bookableTicket-1):
+    #         #departureTime[i] = flightsjason[i]['itineraries'][0]['segments'][1]['departure']['at']
+    #         # duration[i] = flightsjason[i]['itineraries'][0]['duration']
+    #         # arrivalTime[i] = flightsjason[i]['itineraries'][0]['segments'][1]['arrival']['at']
+    #         # carrierCode[i] = flightsjason[i]['itineraries'][0]['segments'][1]['carrierCode']
+    #         # price[i] = flightsjason[i]['price']['grandTotal']
+
+    #         if len(.flight['itineraries'][i]['segments']) == 2: 
+
+    #     print(price) 
+    # except ResponseError as error:
+    #     print(error)
+        
+
+
+    return render(request, 'hotels/test.html', {}) 
+
+#######################################################################################################################################
+
+def get_hour(date_time):
+    return datetime.strptime(date_time[0:19], "%Y-%m-%dT%H:%M:%S").strftime("%H:%M")
+
+
+
+
+
+
+
+
+
 
 
 class SignUpForm(UserCreationForm):

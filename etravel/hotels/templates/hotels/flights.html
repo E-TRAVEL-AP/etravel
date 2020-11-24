@@ -7,24 +7,26 @@
       <div class="col-md-12">
         <form class="form_book">
           <div class="row">
-          
-
-
-
-
-          <div class="col-md-6">
+            <div class="col-md-6">
               <label class="date">From</label>
-              <input class="book_n" type="text" placeholder="Enter a place of origin" />
+              <input
+                class="book_n"
+                type="text"
+                placeholder="Enter a place of origin"
+              />
             </div>
 
             <div class="col-md-6">
               <label class="date">Destination</label>
-              <input class="book_n" type="text" placeholder="Enter a destination" />
+              <input
+                class="book_n"
+                type="text"
+                placeholder="Enter a destination"
+              />
             </div>
-            </div>
+          </div>
 
-            <div class="row">
-
+          <div class="row">
             <div class="col-md-6">
               <label class="date">ARRIVAL DATE</label>
               <input class="book_n" type="date" />
@@ -33,11 +35,10 @@
               <label class="date">DEPARTURE DATE</label>
               <input class="book_n" type="date" />
             </div>
-            
+
             <div class="col-md-4 justify-content-center">
               <button class="book_btn">Book Now</button>
             </div>
-            
           </div>
         </form>
       </div>
@@ -45,42 +46,26 @@
   </div>
 </section>
 <!-- =========================== Bootstrap Form ENDS=============================-->
-
-<div class="container" id = "hotelsboxes">
-    <div class="paddingsbottom">
-      {% for hotel in hotels %} {% if hotel.continent == "northamerica" %}
-
-      <div class="hoteladjusting">
-        <img
-          src="../../static/images/hotel1.jpg"
-          alt="Image"
-          style="width:400px;"
-        />
-        <div class="hotelDescription">
-          <h3 class="hotelname">{{hotel.name}}</h3>
-          <p >{{hotel.location}}</p>
-          <p >
-            This hotel follow covid safe procedure.
-          </p>
-          <span class="badge badge-info">Covid Safe</span>
-          <span class="badge badge-dark">AC</span>
-          <span class="badge badge-success">liesure</span>
-        </div>
-        <a href="#" class="pricecontainer pricecontainer2 pricecontainer3" style="text-decoration: none !important;";>
-          <p style="color: #f8f8f8;
-  font-size: 1.6rem;
-  font-weight: 600;">Rs.{{hotel.price}}</p>
-          <p style="color: #f8f8f8;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;">Book</p>
-        </a>
-      </div>
-      {% endif %} {% endfor %}
-    </div>
+<div class="container">
+<div class="flightSearch">
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1">Airline</div>
+      <div class="col col-2">Boarding</div>
+      <div class="col col-3">Destination</div>
+      <div class="col col-4">Class</div>
+      <div class="col col-5">Price</div>
+      <div class="col col-6">Book</div>
+    </li>
+    <li class="table-row">
+      <div class="col col-1" data-label="Flight Id">Air India</div>
+      <div class="col col-2" data-label="From">12:20</div>
+      <div class="col col-3" data-label="Destination">15:20</div>
+      <div class="col col-4" data-label="Class">Economy</div>
+      <div class="col col-5" data-label="Price">Rs.2000</div>
+      <div class="col col-6" data-label="Book"><button btn btn-submit>Book</button></div>
+    </li>
+  </ul>
 </div>
-  </div>
-  </div>
-
-  {%endblock content %}
-
+</dic>
+{%endblock content %}

@@ -1,0 +1,28 @@
+<body>
+   {{prediction}} 
+<form action="" method="POST" id="form_id">
+      {% csrf_token %} 
+      <h2&>Trip Purpose Prediction</h2> 
+     <p>
+         <input type="text" name="Origin" id="inputOrigin" 
+            placeholder="From" required autofocus> 
+      </p>
+      <p>
+         <input type="text" name="Destination" id="inputDestination" 
+            placeholder="To" required autofocus>
+      </p> 
+      <p> 
+         <input type="date" name="Departuredate" id="idDeparturedate" required> 
+      </p> 
+      <p>
+         <input type="date" name="Returndate" id="idReturndate" required> 
+      </p> 
+      <input type="Submit" name="Submit" value="Submit" />
+   </form> 
+
+
+
+
+
+
+
