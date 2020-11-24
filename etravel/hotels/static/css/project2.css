@@ -7,6 +7,10 @@
   background-size: cover;
 }
 
+input[type="text"] {
+  text-transform: uppercase !important;
+}
+
 #homepage::before {
   content: "";
   background: rgba(44, 94, 160, 0.45);

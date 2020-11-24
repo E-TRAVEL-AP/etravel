@@ -5,32 +5,26 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <form class="form_book">
+        <form action="" class="form_book" method="POST" id="form_id">
+        {% csrf_token %}
           <div class="row">
-          
-
-
-
 
           <div class="col-md-3">
               <label class="date">Your Destination</label>
-              <input class="book_n" type="text" placeholder="Enter a destination or hotel name" />
+              <input class="book_n" type="text" name="Origin" id="origin"  placeholder="{{ origin }}" required autofocus />
             </div>
             
-
-
-
             <div class="col-md-3">
               <label class="date">ARRIVAL DATE</label>
-              <input class="book_n" type="date" />
+              <input class="book_n" type="date" name="Departuredate" id="idDeparturedate" required>
             </div>
             <div class="col-md-3">
               <label class="date">DEPARTURE DATE</label>
-              <input class="book_n" type="date" />
+              <input class="book_n" type="date" name="Returndate" id="idReturndate" required />
             </div>
             
             <div class="col-md-3">
-              <button class="book_btn">Book Now</button>
+              <button class="book_btn" type="Submit" name="Submit" value="Submit">Book Now</button>
             </div>
           </div>
         </form>
@@ -43,7 +37,7 @@
 
    <div class="container" id = "hotelsboxes">
     <div class="paddingsbottom">
-      {% for hotel in hotels %} {% if hotel.continent == "northamerica" %}
+      {% for hotel in hotelResult %} 
 
       <div class="hoteladjusting">
         <img
@@ -53,13 +47,32 @@
         />
         <div class="hotelDescription">
           <h3 class="hotelname">{{hotel.name}}</h3>
-          <p >{{hotel.location}}</p>
+          <p >{{origin}}</p>
           <p >
-            This hotel follow covid safe procedure.
+            {{hotel.description}}
           </p>
+          {% if Covid %}
           <span class="badge badge-info">Covid Safe</span>
+          {% endif %}
+          
           <span class="badge badge-dark">AC</span>
-          <span class="badge badge-success">liesure</span>
+          
+          {% if hotel.Parking %}
+          <span class="badge badge-success">Parking Available</span>
+          {% endif %}
+          {% if hotel.Heritage %}
+          <span class="badge badge-warning"> Heritage</span>
+          {% endif %}
+          {% if hotel.Pool %}
+          <span class="badge badge-danger">Pool</span>
+          {% endif %}
+          {% if hotel.Gym %}
+          <span class="badge badge-primary">Gym</span>
+          {% endif %}
+          {% if hotel.HotBath %}
+          <span class="badge badge-success">Hot Bath</span>
+          {% endif %}
+
         </div>
         <a href="#" class="pricecontainer pricecontainer2 pricecontainer3" style="text-decoration: none !important;";>
           <p style="color: #f8f8f8;
@@ -71,7 +84,7 @@
   text-transform: uppercase;">Book</p>
         </a>
       </div>
-      {% endif %} {% endfor %}
+      {% endfor %}
     </div>
 </div>
   </div>
