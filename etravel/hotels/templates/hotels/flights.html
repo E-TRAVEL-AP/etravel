@@ -5,35 +5,28 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <form class="form_book">
+        <form action="" class="form_book" method="POST" id="form_id">
+        {% csrf_token %}
           <div class="row">
             <div class="col-md-6">
               <label class="date">From</label>
-              <input
-                class="book_n"
-                type="text"
-                placeholder="Enter a place of origin"
-              />
+              <input class="book_n" type="text" name="Origin" id="inputOrigin"  placeholder="{{ origin }}" required autofocus />
             </div>
 
             <div class="col-md-6">
               <label class="date">Destination</label>
-              <input
-                class="book_n"
-                type="text"
-                placeholder="Enter a destination"
-              />
+              <input class="book_n" type="text" placeholder="{{ destination }}" name="Destination" id="inputDestination" required autofocus />
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-6">
               <label class="date">ARRIVAL DATE</label>
-              <input class="book_n" type="date" />
+              <input class="book_n" type="date" name="Departuredate" id="idDeparturedate" required>
             </div>
             <div class="col-md-6">
               <label class="date">DEPARTURE DATE</label>
-              <input class="book_n" type="date" />
+              <input class="book_n" type="date" name="Returndate" id="idReturndate" required />
             </div>
 
             <div class="col-md-4 justify-content-center">
@@ -46,6 +39,19 @@
   </div>
 </section>
 <!-- =========================== Bootstrap Form ENDS=============================-->
+
+<div class="d-flex justify-content-center" style = "padding-top:15%px;">
+<h2 >{{ origin }} &#x2708 {{ destination }} <br></h2 >
+</div>
+
+<div class="d-flex justify-content-center">
+<h3 >
+{{ departureDate }}
+{% if returnDate %} <span class="text-info">&#10594&#10596</span> {{ returnDate }}{% endif %}
+</h3>
+</div>
+
+
 <div class="container">
 <div class="flightSearch">
   <ul class="responsive-table">
@@ -57,13 +63,21 @@
       <div class="col col-5">Price</div>
       <div class="col col-6">Book</div>
     </li>
+
+    {%for r in flightResults%}
     <li class="table-row">
-      <div class="col col-1" data-label="Flight Id">Air India</div>
-      <div class="col col-2" data-label="From">12:20</div>
-      <div class="col col-3" data-label="Destination">15:20</div>
-      <div class="col col-4" data-label="Class">Economy</div>
-      <div class="col col-5" data-label="Price">Rs.2000</div>
+    
+      
+      <div class="col col-1" data-label="Flight Id">{{r.airlineCarrier}}</div>
+      <div class="col col-2" data-label="From">{{r.DepartureTime}}</div>
+      <div class="col col-3" data-label="Destination">{{r.ArrivalTime}}</div>
+      <div class="col col-4" data-label="Class">{{r.Duration}}</div>
+      <div class="col col-5" data-label="Price">${{r.price}}</div>
       <div class="col col-6" data-label="Book"><button btn btn-submit>Book</button></div>
+    
+    {% endfor %}
+
+      
     </li>
   </ul>
 </div>
