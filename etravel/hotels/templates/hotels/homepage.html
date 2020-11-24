@@ -94,29 +94,30 @@
     </div>
     <div id="menu1" class="container tab-pane fade"><br>
       
-	  <form>
+	  <form action="flights/" method="POST" id="form_id">
+        {% csrf_token %}
               <div class="row">
           <div class="col-md-6">
               <label class="date">From</label>
-              <input class="book_n" type="text" placeholder="Enter a place of origin" />
+              <input class="book_n" type="text" name="Origin" id="inputOrigin"  placeholder="Enter a place of origin" required autofocus />
             </div>
 
             <div class="col-md-6">
               <label class="date">Destination</label>
-              <input class="book_n" type="text" placeholder="Enter a destination" />
+              <input class="book_n" type="text" placeholder="Enter a destination" name="Destination" id="inputDestination" required autofocus />
             </div>
             </div>
               <div class="row" style="padding-top:20px;">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <span class="form-label">Check In</span>
-                    <input class="book_n" type="date" required />
+                    <input class="book_n" type="date" name="Departuredate" id="idDeparturedate" required>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <span class="form-label">Check out</span>
-                    <input class="book_n" type="date" required />
+                    <input class="book_n" type="date" name="Returndate" id="idReturndate" required />
                   </div>
                 </div>
               </div>
@@ -124,7 +125,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <span class="form-label">Adults</span>
-                    <select class="book_n">
+                    <select class="book_n" name="adults" id="adults">
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -146,7 +147,7 @@
               </div>
               <div class="form-btn">
                 <center>
-                  <button class="book_btn">Search</button>
+                  <button class="book_btn" type="Submit" name="Submit" value="Submit">Search</button>
                 </center>
               </div>
             </form>
