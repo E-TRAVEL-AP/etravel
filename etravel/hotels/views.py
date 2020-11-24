@@ -46,20 +46,21 @@ def hotels(request):
 
 
     origin = request.POST.get('Origin')
-    destination = request.POST.get('Destination')
     departureDate = request.POST.get('Departuredate')
     returnDate = request.POST.get('Returndate')
     
-
+    
 
 
 
     kwargs = {'cityCode': origin,
               }
     
-    print(kwargs)
+    
     hotelResult = []
     if origin and departureDate and returnDate:
+        kwargs['cityCode'] = kwargs['cityCode'].upper()
+        
         try:
             response = amadeus.shopping.hotel_offers.get(**kwargs)
             hotelsjason = response.data
@@ -96,7 +97,7 @@ def hotels(request):
             
             print(hotelResult)
             return render(request, 'hotels/hotels.html', {'hotelResult': hotelResult,
-                                                         'origin': origin,
+                                                         'origin': origin.upper(),
                                                          'departureDate': departureDate,
                                                          'returnDate': returnDate,
                                                          })
@@ -142,6 +143,10 @@ def flights(request):
     print(data)
 
     if origin and destination and departureDate:
+
+        kwargs['originLocationCode'] = kwargs['originLocationCode'].upper()
+        kwargs['destinationLocationCode'] = kwargs['destinationLocationCode'].upper()
+
         try:
             response = amadeus.shopping.flight_offers_search.get(**kwargs)
             flightsjason = response.data
@@ -202,8 +207,8 @@ def flights(request):
                 searchedFlight = {'airlineCarrier':airlineCarrier, 'DepartureTime': DepartureDate, 'Duration': Duration, 'ArrivalTime': ArrivalDate, 'numberofStops': numberofStops, 'price': price, 'flightID': flightID, 'availableseats':availableseats}    
                 flightResults.append(searchedFlight)
             
-            return render(request, 'hotels/flights.html', {'flightResults':flightResults,'origin': origin,
-                                                     'destination': destination,
+            return render(request, 'hotels/flights.html', {'flightResults':flightResults,'origin': origin.upper(),
+                                                     'destination': destination.upper(),
                                                      'departureDate': departureDate,
                                                      'returnDate': returnDate,})
         except ResponseError as error:
@@ -229,93 +234,6 @@ def get_hour(date_time):
 
 #######################################################################################################################################
 
-
-#######################################################################################################################################
-
-def test(request):
-    
-    origin = request.POST.get('Origin')
-    checkinDate = request.POST.get('Checkindate')
-    checkoutDate = request.POST.get('Checkoutdate')
-
-    
-
-
-
-    kwargs = {'cityCode': request.POST.get('Origin'),
-              'checkInDate': request.POST.get('Checkindate'),
-              'checkOutDate': request.POST.get('Checkoutdate')}
-    
-
-    hotelResult = []
-    if origin and checkinDate and checkoutDate:
-        try:
-            response = amadeus.shopping.hotel_offers.get(**kwargs)
-            hotelsjason = response.data
-
-            
-            for hotel in hotelsjason:
-
-                price = hotel['offers'][0]['price']['total']
-                name = hotel['hotel']['name']
-                hotelID = hotel['hotel']['hotelId']
-                distance = hotel['hotel']['hotelDistance']['distance']
-                rating = hotel['hotel']['rating']
-                description = hotel['hotel']['description']['text']
-                address = hotel['hotel']['address']['lines']
-                   
-                searchedFlight = {'price': price,'name':name, 'hotelID': hotelID, 'distance': distance, 'rating': rating, 'description': description,  'address': address}    
-                hotelResult.append(searchedFlight)
-            
-            print(hotelResult)
-            return render(request, 'hotel/test.html', {'response': response,
-                                                         'origin': origin,
-                                                         'departureDate': checkinDate,
-                                                         'returnDate': checkoutDate,
-                                                         })
-        except ResponseError as error:
-            messages.add_message(request, messages.ERROR, error)
-            return render(request, 'hotels/flights.html', {}) 
-            
-    
-
-
-    return render(request, 'hotels/flights.html', {}) 
-
-#######################################################################################################################################
-
-
-
-#######################################################################################################################################
-
-def origin_airport_search(request):
-    print(request.is_ajax())
-    if request.is_ajax():
-        
-        data = amadeus.reference_data.locations.get(keyword=request.GET.get('term', None),
-                                                    subType=Location.ANY).data
-       
-        print(data)
-    return HttpResponse(get_city_airport_list(data), 'application/json')
-
-
-def destination_airport_search(request):
-    if request.is_ajax():
-        try:
-            data = amadeus.reference_data.locations.get(keyword=request.GET.get('term', None),
-                                                        subType=Location.ANY).data
-        except ResponseError as error:
-            messages.add_message(request, messages.ERROR, error)
-    return HttpResponse(get_city_airport_list(data), 'application/json')
-
-
-def get_city_airport_list(data):
-    result = []
-    for i, val in enumerate(data):
-        result.append(data[i]['iataCode'] + ', ' + data[i]['name'])
-    result = list(dict.fromkeys(result))
-    return json.dumps(result)
-    
 
 #######################################################################################################################################
 
