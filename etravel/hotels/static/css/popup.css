@@ -1,7 +1,10 @@
-li:hover{
+
+.dest_list:hover{
     background-color: #bbb;
 }
-
+.origin_list:hover{
+    background-color: #bbb;
+}
 #myTable{
   right: 20px;
   width: 100%;

@@ -1,13 +1,10 @@
-{% extends 'main.html' %}
+{% extends 'hotels/main.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-
 <!-- refer: https://getbootstrap.com/docs/4.5/layout/grid/#row-columns -->
-
-<div class = "container">
-
-    <form method = "POST" class="login">
+<div id="auth" class="customContainer">
+   <form method = "POST" class="login">
      <h3 style="text-align: center;">Register</h3>
      <hr/>
         
@@ -22,32 +19,6 @@
 
     </form>
 </div>
-
-
-
-
-<!--<form class="login">
-    <div class="form-group">
-        <label for="inputEmail">Name</label>
-        <input type="name" class="form-control" id="inputName" placeholder="Name">
-    </div>
-    <div class="form-group">
-        <label for="inputEmail">Email</label>
-        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-    </div>
-    <div class="form-group">
-        <label for="inputPassword">Password</label>
-        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-    </div>
-    <div class="form-group">
-        <label for="inputPassword">Re-enter Password</label>
-        <input type="password" class="form-control" id="checkPassword" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-primary">Sign up</button>
-    <div class="signup">
-        Already have an account? <a href="{% url 'login' %}">Login here!</a>
-    </div>
-</form>-->
 
 
 {% endblock content %}

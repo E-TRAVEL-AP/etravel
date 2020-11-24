@@ -60,7 +60,8 @@
     <nav
       id="navigationCustom"
       class="navbar navbar-expand-lg navbar-light bg-light"
-    >
+      onmouseover="clearSearch()"
+      >
       <a id="logo" class="navbar-brand" href="/">Getaway</a>
       <button
         class="navbar-toggler"
@@ -89,14 +90,21 @@
           </li>
         </ul>
         <ul class="navbar-nav" id="link">
+          {% if user.is_authenticated %}
+          <li id="button-link" class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}"
+              >Sign Out</a
+            >
+          </li>
+          {% else %}
           <li class="nav-item">
-            <a class="nav-link" style="text-decoration: none" href="#"
-              >Sign In</a
+            <a class="nav-link" style="text-decoration: none" href="{% url 'login' %}">Sign In</a
             >
           </li>
           <li id="button-link" class="nav-item">
-            <a class="nav-link" href="#">Sign Up</a>
+            <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
           </li>
+          {% endif %}
           <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
