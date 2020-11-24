@@ -38,26 +38,23 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div id="home" class="container tab-pane active"><br>
-      <form>
+      <form action="hotels/" class="form_book" method="POST" id="form_id">
+        {% csrf_token %}
               <div class="form-group">
                 <span class="form-label">Your Destination</span>
-                <input
-                  class="book_n"
-                  type="text"
-                  placeholder="Enter a destination or hotel name"
-                />
+                <input class="book_n" type="text" name="Origin" id="origin"  placeholder="Enter The Destination" required autofocus />
               </div>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <span class="form-label">Check In</span>
-                    <input class="book_n" type="date" required />
+                   <input class="book_n" type="date" name="Departuredate" id="idDeparturedate" required>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <span class="form-label">Check out</span>
-                    <input class="book_n" type="date" required />
+                    <input class="book_n" type="date" name="Returndate" id="idReturndate" required />
                   </div>
                 </div>
               </div>
@@ -87,7 +84,7 @@
               </div>
               <div class="form-btn">
                 <center>
-                  <button class="book_btn">Search</button>
+                  <button class="book_btn" type="Submit" name="Submit" value="Submit">Search</button>
                 </center>
               </div>
             </form>

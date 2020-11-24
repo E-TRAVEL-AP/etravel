@@ -13,9 +13,12 @@ from django.contrib.auth.models import User
 import random
 from . import fakeHotels
 #For API
-from amadeus import Client, ResponseError
+from amadeus import Client, ResponseError, Location
 import json
 from datetime import datetime
+from django.http import HttpResponse
+from iata_codes import IATACodesClient
+
 
 
 
@@ -25,6 +28,9 @@ from datetime import datetime
 
 amadeus = Client(client_id='t7HkaagNkZgxjG30TXfpjtmWQKRXO0U3', 
                  client_secret='w4PbnQiOa0XV3gQt')
+
+
+
 
 #######################################################################################################################################
 
@@ -36,8 +42,73 @@ def homepage(request):
 #######################################################################################################################################
 
 def hotels(request):
-    hotels = fakeHotels.hotels
-    return render(request, 'hotels/hotels.html', {'hotels': hotels})
+
+
+
+    origin = request.POST.get('Origin')
+    departureDate = request.POST.get('Departuredate')
+    returnDate = request.POST.get('Returndate')
+    
+    
+
+
+
+    kwargs = {'cityCode': origin,
+              }
+    
+    
+    hotelResult = []
+    if origin and departureDate and returnDate:
+        kwargs['cityCode'] = kwargs['cityCode'].upper()
+        
+        try:
+            response = amadeus.shopping.hotel_offers.get(**kwargs)
+            hotelsjason = response.data
+
+            
+
+            
+            for hotel in hotelsjason:
+
+                price = hotel['offers'][0]['price']['total']
+                name = hotel['hotel']['name']
+                hotelID = hotel['hotel']['hotelId']
+                distance = hotel['hotel']['hotelDistance']['distance']
+
+                Covid= bool(random.getrandbits(1))
+                Parking= bool(random.getrandbits(1))
+                Heritage= bool(random.getrandbits(1))
+                Pool= bool(random.getrandbits(1))
+                Gym= bool(random.getrandbits(1))
+                HotBath= bool(random.getrandbits(1))
+                 
+
+                
+                try:
+                    description = hotel['hotel']['description']['text']
+                    description = (description[:125] + '...') if len(description) > 75 else description
+                except:
+                    description = "This is covide friendly Hotel with the amenities. Please visit!"
+                address = hotel['hotel']['address']['lines']
+
+                 
+                searchedFlight = {'price': price,'name':name, 'hotelID': hotelID, 'distance': distance, 'description': description,  'address': address, 'Covid':Covid, 'Parking':Parking, 'Heritage':Heritage, 'Pool':Pool, 'Gym':Gym, 'HotBath':HotBath}    
+                hotelResult.append(searchedFlight)
+            
+            print(hotelResult)
+            return render(request, 'hotels/hotels.html', {'hotelResult': hotelResult,
+                                                         'origin': origin.upper(),
+                                                         'departureDate': departureDate,
+                                                         'returnDate': returnDate,
+                                                         })
+        except ResponseError as error:
+            messages.add_message(request, messages.ERROR, error)
+            return render(request, 'hotels/hotels.html', {}) 
+            
+    
+
+
+    return render(request, 'hotels/hotels.html', {}) 
 
 #######################################################################################################################################
 
@@ -66,7 +137,16 @@ def flights(request):
 
     
 
+    data = amadeus.reference_data.locations.get(keyword=request.GET.get('{origin}', None),
+                                                    subType=Location.ANY).data
+       
+    print(data)
+
     if origin and destination and departureDate:
+
+        kwargs['originLocationCode'] = kwargs['originLocationCode'].upper()
+        kwargs['destinationLocationCode'] = kwargs['destinationLocationCode'].upper()
+
         try:
             response = amadeus.shopping.flight_offers_search.get(**kwargs)
             flightsjason = response.data
@@ -127,21 +207,15 @@ def flights(request):
                 searchedFlight = {'airlineCarrier':airlineCarrier, 'DepartureTime': DepartureDate, 'Duration': Duration, 'ArrivalTime': ArrivalDate, 'numberofStops': numberofStops, 'price': price, 'flightID': flightID, 'availableseats':availableseats}    
                 flightResults.append(searchedFlight)
             
-            return render(request, 'hotels/flights.html', {'flightResults':flightResults,'origin': origin,
-                                                     'destination': destination,
+            return render(request, 'hotels/flights.html', {'flightResults':flightResults,'origin': origin.upper(),
+                                                     'destination': destination.upper(),
                                                      'departureDate': departureDate,
                                                      'returnDate': returnDate,})
         except ResponseError as error:
             messages.add_message(request, messages.ERROR, error)
             return render(request, 'hotels/flights.html', {}) 
             
-        
     
-
-
-    
-        
-        
 
 
     return render(request, 'hotels/flights.html', {}) 
@@ -161,7 +235,7 @@ def get_hour(date_time):
 #######################################################################################################################################
 
 
-
+#######################################################################################################################################
 
 
 
