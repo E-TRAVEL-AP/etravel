@@ -1,26 +1,28 @@
-{% extends 'hotels/main.html' %}
-{% load static %}
-{% load crispy_forms_tags %}
+{% extends 'hotels/main.html' %} {% load static %} {% load crispy_forms_tags %}
 {% block content %}
 
 <!-- refer: https://getbootstrap.com/docs/4.5/layout/grid/#row-columns -->
 
 <div id="auth" class="customContainer">
-    <br />
-    <br />
-    <form method = "POST" class="login">
-        <h3 style="text-align: center;">Login</h3>
-        <hr/>
-        
-        {% csrf_token %}
+  <br />
+  <br />
+  <form method="POST" class="login">
+    <h3 style="text-align: center">Login</h3>
+    <hr />
 
-        {{ form|crispy }}
-
-        <button type="submit" class="btn btn-success">Login</button>
-        <p>Don't have an account?<a href="{% url 'register' %}"> Register here!</a></p>
-    </form>
+    {% csrf_token %} {{ form|crispy }}
+    <div style="padding-top: 20px !important; padding-bottom: 20px !important">
+      <button type="submit" class="book_btn">Login</button>
+    </div>
+    <p>
+      Don't have an account?<a
+        href="{% url 'register' %}"
+        style="text-decoration: none; color: #fa6a48"
+      >
+        Register here!</a
+      >
+    </p>
+  </form>
 </div>
-
-
 
 {% endblock content %}

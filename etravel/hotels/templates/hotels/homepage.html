@@ -38,9 +38,10 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div id="home" class="container tab-pane active"><br>
-      <form action="hotels/" class="form_book" method="POST" id="form_id">
+      <form action="hotels/"  method="POST" id="form_id">
         {% csrf_token %}
-              <div class="form-group">
+            <div >
+              <div class="form-group"></form>
                 <span class="form-label">Your Destination</span>
                 <hr onmouseover="clearSearch()"> 
                 <input class="book_n" type="text" name="Origin" id="origin"  onkeyup="myFunction3()" placeholder="{{ origin }}" required autofocus />
@@ -92,6 +93,7 @@
                 <center>
                   <button class="book_btn" type="Submit" name="Submit" value="Submit">Search</button>
                 </center>
+              </div>
               </div>
             </form>
             
