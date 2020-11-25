@@ -389,63 +389,59 @@ h2 small {
   z-index: 2;
 }
 
-h2::after {
-  content: "";
-  width: 130px;
-  position: absolute;
-  margin: 0 auto;
-  height: 3px;
-  background: #f8f8f8;
-  left: 0;
-  right: 0;
-  bottom: -10px;
-}
-.carousel-inner .carousel-item .img-box {
-  width: 135px;
-  height: 135px;
-}
-.carousel-control-prev {
-  left: -100px;
-}
-.carousel-control-next {
-  right: -100px;
-}
-.carousel-indicators {
-  top: 320px;
-}
-@media (min-width: 320px) and (max-width: 640px) {
-  .carousel-inner .carousel-item p {
-    font-size: 14px;
-  }
-  .carousel-control-prev {
-    left: -40px;
-  }
-  .carousel-control-next {
-    right: -40px;
-  }
-  .carousel-indicators {
-    top: 400px;
-  }
+.choose {
+  margin-top: 90px;
 }
 
-.carousel-control-next-icon {
-  height: 100px;
-  width: 100px;
-  outline: black;
-  background-size: 100%, 100%;
-  border-radius: 50%;
-  border: 1px solid black;
-  background-image: none;
+.choose_box {
+  padding-top: 76px;
 }
 
-.carousel-control-next-icon:after {
-  content: ">";
+.choose_box .titlepage {
+  text-align: left;
+  padding-bottom: 35px;
+}
+
+.text_norlam {
+  font-weight: normal;
+}
+
+.choose_box p {
+  font-size: 17px;
+  line-height: 36px;
+  color: #313131;
+  padding: 0px 0px 45px 0px;
+}
+
+.img_box {
+  margin-bottom: 30px;
+}
+
+.img_box figure {
+  margin: 0;
+}
+
+.img_box figure img {
+  width: 100%;
+}
+
+.titlepage h2 {
   font-size: 55px;
-  color: red;
+  color: #313131;
+  line-height: 60px;
+  font-weight: bold;
+  padding: 0;
+  text-align: left;
 }
 
-.carousel-control-prev-icon:after {
-  content: "<";
-  font-size: 55px;
-  color: red;
+.carousel-inner img {
+  width: 100%;
+}
+
+.footer {
+  padding-top: 100px;
+  text-align: center;
+  padding: 3px;
+  background-color: #5c5757;
+  color: white;
 }
