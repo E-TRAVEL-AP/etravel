@@ -21,7 +21,8 @@ from iata_codes import IATACodesClient
 
 
 
-
+locations = ["PUNE (PNQ)", "NEW DELHI (DEL)", "MUMBAI (BOM)", "LONDON (LON)", "BANGKOK (BKK)", "SYDNEY (SYD)", "NEW YORK CITY(NYC)", "PARIS (PAR)"]
+codes = ["PNQ", "DEL", "BOM", "LON", "BKK", "SYD", "NYC", "PAR"]
 #################################################
 #API KEYS
 
@@ -35,7 +36,10 @@ amadeus = Client(client_id='t7HkaagNkZgxjG30TXfpjtmWQKRXO0U3',
 #######################################################################################################################################
 
 def homepage(request):
-    return render(request, 'hotels/homepage.html')
+    location_name = locations
+   
+
+    return render(request, 'hotels/homepage.html',  {'location_name': location_name})
 
 #######################################################################################################################################
 
@@ -55,12 +59,16 @@ def hotels(request):
     kwargs = {'cityCode': origin,
               }
     
-    location_name = ["PUNE (PNQ)", "NEW DELHI (DEL)", "MUMBAI (BOM)", "LONDON (LON)", "BANGKOK (BKK)", "SYDNEY (SYD)"]
-    codes = ["PNQ", "DEL", "BOM", "LON", "BKK", "SYD"]
+    location_name = locations
+    #codes = ["PNQ", "DEL", "BOM", "LON", "BKK", "SYD"]
     hotelResult = []
     if origin and departureDate and returnDate:
         kwargs['cityCode'] = kwargs['cityCode'].upper()
         
+        o = kwargs['cityCode']
+        for i in range(len(location_name)):    
+            if o == location_name[i]:
+                 kwargs['cityCode'] = codes[i]
         try:
             response = amadeus.shopping.hotel_offers.get(**kwargs)
             hotelsjason = response.data
@@ -136,9 +144,7 @@ def flights(request):
               'adults': adults
               }
 
-    location_name = ["PUNE (PNQ)", "NEW DELHI (DEL)", "MUMBAI (BOM)", "LONDON (LON)", "BANGKOK (BKK)", "SYDNEY (SYD)"]
-    codes = ["PNQ", "DEL", "BOM", "LON", "BKK", "SYD"]
-    
+    location_name = locations
 
     data = amadeus.reference_data.locations.get(keyword=request.GET.get('{origin}', None),
                                                     subType=Location.ANY).data
