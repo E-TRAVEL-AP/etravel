@@ -35,18 +35,19 @@
 
           <div class="row">
             <div class="col-md-6">
-              <label class="date">ARRIVAL DATE</label>
-              <input class="book_n" type="date" name="Departuredate" id="idDeparturedate" required>
-            </div>
-            <div class="col-md-6">
-              <label class="date">DEPARTURE DATE</label>
+              <label class="date">INTERVAL START:</label>
               <input class="book_n" type="date" name="Returndate" id="idReturndate" required />
             </div>
+            <div class="col-md-6">
+              <label class="date">INTERVAL END:</label>
+              <input class="book_n" type="date" name="Departuredate" id="idDeparturedate" required>
+            </div>
+           
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <span class="form-label" name="adults" id="adults">Adults</span>
-                  <select class="book_n" >
+                  <span class="form-label">Adults</span>
+                  <select class="book_n" name="adults" id="adults">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -56,8 +57,8 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <span class="form-label" name="children" id="children">Children</span>
-                  <select class="book_n">
+                  <span class="form-label" >Children</span>
+                  <select class="book_n" name="children" id="children">
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
@@ -126,9 +127,9 @@
           
           <div id="popup_buttons">
             {%if user.is_authenticated%}
-              <button onclick="togglePopup()" href="{% url 'homepage' %}">BOOK NOW!!</button>
+              <button class="btn btn-warning" onclick="togglePopup()" href="{% url 'homepage' %}">BOOK NOW!!</button>
             {%else%}
-              <button onclick="togglePopup()" href="{% url 'login' %}">Please login!</button>
+              <button class="btn btn-success" onclick="togglePopup()" href="{% url 'login' %}">Please login!</button>
             {%endif%}
           </div>
           
