@@ -1,5 +1,5 @@
 # Etravel
-Etravel is a Django project created for Advanced Programming course. Please read Documentation for in-depth description.
+Etravel is a Django project created for Advanced Programming course. Please read Documentation pdf for in-depth description.
 
 ## Installation
 
