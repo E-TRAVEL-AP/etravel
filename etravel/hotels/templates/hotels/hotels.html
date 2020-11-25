@@ -9,7 +9,7 @@
         {% csrf_token %}
           <div class="row">
 
-          <div class="col-md-3">
+           <div class="col-md-3">
               <label class="date">Your Destination - enter the code in bracket</label>
               <input class="book_n" type="text" name="Origin" id="origin"  onkeyup="myFunction1()" placeholder="{{ origin }}" required autofocus />
               <ul id="myTable1" >
@@ -33,6 +33,30 @@
               <button class="book_btn" type="Submit" name="Submit" value="Submit">Book Now</button>
             </div>
           </div>
+          
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <span class="form-label" name="adults" id="adults">Adults</span>
+                <select class="book_n" >
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                </select>
+                <span class="select-arrow"></span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <span class="form-label" name="children" id="children">Children</span>
+                <select class="book_n">
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                </select>
+                <span class="select-arrow"></span>
+              </div>
+            </div>
         </form>
       </div>
     </div>

@@ -52,6 +52,10 @@ def hotels(request):
     origin = request.POST.get('Origin')
     departureDate = request.POST.get('Departuredate')
     returnDate = request.POST.get('Returndate')
+    adults = (request.POST.get('adults'))
+    children = (request.POST.get('children'))
+    adults = int(adults)
+    children = int(children)
     hotel_images = ["../../static/images/hotel1.jpg", "../../static/images/hotel2.jpg","../../static/images/hotel3.jpg","../../static/images/hotel4.jpg","../../static/images/hotel5.jpg","../../static/images/hotel6.jpg","../../static/images/hotel7.jpg","../../static/images/hotel8.jpg","../../static/images/hotel9.jpg", "../../static/images/hotel10.jpg", "../../static/images/hotel11.jpg", "../../static/images/hotel12.jpg", "../../static/images/hotel13.jpg", "../../static/images/hotel14.jpg", "../../static/images/hotel15.jpg", "../../static/images/hotel16.jpg"]
 
 
@@ -131,7 +135,10 @@ def flights(request):
     destination = request.POST.get('Destination')
     departureDate = request.POST.get('Departuredate')
     returnDate = request.POST.get('Returndate')
-    adults = request.POST.get('Adults')
+    adults = (request.POST.get('adults'))
+    children = (request.POST.get('children'))
+    adults = int(adults)
+    children = int(children)
 
     flightResults = []
 
@@ -222,14 +229,18 @@ def flights(request):
                         numberofStops = 0
 
                     index += 1
-                   
-                searchedFlight = {'airlineCarrier':airlineCarrier, 'DepartureTime': DepartureDate, 'Duration': Duration, 'ArrivalTime': ArrivalDate, 'numberofStops': numberofStops, 'price': price, 'flightID': flightID, 'availableseats':availableseats}    
+                price1 = float(price)
+                totalPrice = adults*price1 + 0.67*children*price1  
+                totalPrice = round(totalPrice, 2) 
+                searchedFlight = {'airlineCarrier':airlineCarrier, 'DepartureTime': DepartureDate, 'Duration': Duration, 'ArrivalTime': ArrivalDate, 'numberofStops': numberofStops, 'price': price, 'totalPrice': totalPrice, 'flightID': flightID, 'availableseats':availableseats}    
                 flightResults.append(searchedFlight)
-            
+        
             return render(request, 'hotels/flights.html', {'flightResults':flightResults,'origin': origin.upper(),
                                                      'destination': destination.upper(),
                                                      'departureDate': departureDate,
                                                      'returnDate': returnDate,
+                                                     'adults': adults,
+                                                     'children': children,
                                                      'location_name' : location_name,})
         except ResponseError as error:
             messages.add_message(request, messages.ERROR, error)
