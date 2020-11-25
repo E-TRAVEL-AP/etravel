@@ -10,8 +10,14 @@
           <div class="row">
 
           <div class="col-md-3">
-              <label class="date">Your Destination</label>
-              <input class="book_n" type="text" name="Origin" id="origin"  placeholder="{{ origin }}" required autofocus />
+              <label class="date">Your Destination - enter the code in bracket</label>
+              <input class="book_n" type="text" name="Origin" id="origin"  onkeyup="myFunction1()" placeholder="{{ origin }}" required autofocus />
+              <ul id="myTable1" >
+
+                {% for location in location_name %}
+                <li class="list-group-item origin_list" onclick="origin_select()" data-location = "{{location}}">{{location}}</li> 
+                {% endfor %}
+              </ul>      
             </div>
             
             <div class="col-md-3">
@@ -41,7 +47,7 @@
 
       <div class="hoteladjusting">
         <img
-          src="../../static/images/hotel1.jpg"
+          src={{hotel.hotelImg}}
           alt="Image"
           style="width:400px;"
         />
@@ -90,7 +96,42 @@
   </div>
   </div>
 
+<script>
+  function clearSearch() {
+    li = document.getElementsByClassName("origin_list");
+    for (i = 0; i < li.length; i++) {  
+        li[i].style.display="none";
+    }
+    li1 = document.getElementsByClassName("dest_list");
+    for (i = 0; i < li1.length; i++) {  
+        li1[i].style.display="none";
+    }
+}
+function myFunction1() {
+  // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("origin");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myTable1");
+    li = document.getElementsByClassName("origin_list");
+    
+  // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) 
+        {                
+        txtValue = li[i].textContent && li[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) 
+            {
+                li[i].style.display = "";
+            } 
+        else 
+        {
+            li[i].style.display = "none";
+        }
+        }  
+        }
 
+
+</script>
 
 
   

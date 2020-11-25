@@ -48,15 +48,15 @@ def hotels(request):
     origin = request.POST.get('Origin')
     departureDate = request.POST.get('Departuredate')
     returnDate = request.POST.get('Returndate')
-    
-    
+    hotel_images = ["../../static/images/hotel1.jpg", "../../static/images/hotel2.jpg","../../static/images/hotel3.jpg","../../static/images/hotel4.jpg","../../static/images/hotel5.jpg","../../static/images/hotel6.jpg","../../static/images/hotel7.jpg","../../static/images/hotel8.jpg","../../static/images/hotel9.jpg", "../../static/images/hotel10.jpg"]
 
 
 
     kwargs = {'cityCode': origin,
               }
     
-    
+    location_name = ["PUNE (PNQ)", "NEW DELHI (DEL)", "MUMBAI (BOM)", "LONDON (LON)", "BANGKOK (BKK)", "SYDNEY (SYD)"]
+    codes = ["PNQ", "DEL", "BOM", "LON", "BKK", "SYD"]
     hotelResult = []
     if origin and departureDate and returnDate:
         kwargs['cityCode'] = kwargs['cityCode'].upper()
@@ -74,6 +74,7 @@ def hotels(request):
                 name = hotel['hotel']['name']
                 hotelID = hotel['hotel']['hotelId']
                 distance = hotel['hotel']['hotelDistance']['distance']
+                hotelImg = random.choice(hotel_images)
 
                 Covid= bool(random.getrandbits(1))
                 Parking= bool(random.getrandbits(1))
@@ -92,7 +93,7 @@ def hotels(request):
                 address = hotel['hotel']['address']['lines']
 
                  
-                searchedFlight = {'price': price,'name':name, 'hotelID': hotelID, 'distance': distance, 'description': description,  'address': address, 'Covid':Covid, 'Parking':Parking, 'Heritage':Heritage, 'Pool':Pool, 'Gym':Gym, 'HotBath':HotBath}    
+                searchedFlight = {'price': price,'name':name, 'hotelID': hotelID, 'distance': distance, 'hotelImg': hotelImg, 'description': description,  'address': address, 'Covid':Covid, 'Parking':Parking, 'Heritage':Heritage, 'Pool':Pool, 'Gym':Gym, 'HotBath':HotBath}    
                 hotelResult.append(searchedFlight)
             
             print(hotelResult)
@@ -100,15 +101,15 @@ def hotels(request):
                                                          'origin': origin.upper(),
                                                          'departureDate': departureDate,
                                                          'returnDate': returnDate,
-                                                         })
+                                                         'location_name': location_name,})
         except ResponseError as error:
             messages.add_message(request, messages.ERROR, error)
-            return render(request, 'hotels/hotels.html', {}) 
+            return render(request, 'hotels/hotels.html', {'location_name': location_name}) 
             
     
 
 
-    return render(request, 'hotels/hotels.html', {}) 
+    return render(request, 'hotels/hotels.html', {'location_name': location_name}) 
 
 #######################################################################################################################################
 
@@ -135,6 +136,8 @@ def flights(request):
               'adults': adults
               }
 
+    location_name = ["PUNE (PNQ)", "NEW DELHI (DEL)", "MUMBAI (BOM)", "LONDON (LON)", "BANGKOK (BKK)", "SYDNEY (SYD)"]
+    codes = ["PNQ", "DEL", "BOM", "LON", "BKK", "SYD"]
     
 
     data = amadeus.reference_data.locations.get(keyword=request.GET.get('{origin}', None),
@@ -143,9 +146,18 @@ def flights(request):
     print(data)
 
     if origin and destination and departureDate:
-
+        
         kwargs['originLocationCode'] = kwargs['originLocationCode'].upper()
         kwargs['destinationLocationCode'] = kwargs['destinationLocationCode'].upper()
+        
+        o =  kwargs['originLocationCode']
+        d = kwargs['destinationLocationCode']
+        for i in range(len(location_name)):    
+            if o == location_name[i]:
+                kwargs['originLocationCode'] = codes[i]
+            if d == location_name[i]:
+                kwargs['destinationLocationCode'] = codes[i]
+              
 
         try:
             response = amadeus.shopping.flight_offers_search.get(**kwargs)
@@ -210,15 +222,16 @@ def flights(request):
             return render(request, 'hotels/flights.html', {'flightResults':flightResults,'origin': origin.upper(),
                                                      'destination': destination.upper(),
                                                      'departureDate': departureDate,
-                                                     'returnDate': returnDate,})
+                                                     'returnDate': returnDate,
+                                                     'location_name' : location_name,})
         except ResponseError as error:
             messages.add_message(request, messages.ERROR, error)
-            return render(request, 'hotels/flights.html', {}) 
+            return render(request, 'hotels/flights.html', {'location_name' : location_name}) 
             
     
 
 
-    return render(request, 'hotels/flights.html', {}) 
+    return render(request, 'hotels/flights.html', {'location_name' : location_name}) 
 
 #######################################################################################################################################
 
@@ -236,14 +249,6 @@ def get_hour(date_time):
 
 
 #######################################################################################################################################
-
-
-
-
-
-
-
-
 
 
 class SignUpForm(UserCreationForm):
@@ -287,7 +292,7 @@ def register(request):
 
     form = SignUpForm
     context = {'form': form}
-    return render(request, "register.html", context)
+    return render(request, "hotels/register.html", context)
 
 #######################################################################################################################################
 
@@ -314,7 +319,7 @@ def login_request(request):
 
     form = AuthenticationForm()
     context = {'form': form}
-    return render(request, "login.html", context)
+    return render(request, "hotels/login.html", context)
 
 #######################################################################################################################################
 

@@ -340,3 +340,17 @@ h2 small {
     text-align: right;
   }
 }
+
+#myTable1{
+  right: 20px;
+  width: 100%;
+  position: absolute;
+  z-index: 3;
+}
+
+#myTable2{
+  right: 20px;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+}
