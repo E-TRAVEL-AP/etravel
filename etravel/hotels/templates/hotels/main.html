@@ -61,7 +61,7 @@
       id="navigationCustom"
       class="navbar navbar-expand-lg navbar-light bg-light"
       onmouseover="clearSearch()"
-      >
+    >
       <a id="logo" class="navbar-brand" href="/">Getaway</a>
       <button
         class="navbar-toggler"
@@ -85,20 +85,20 @@
           <li class="nav-item">
             <a class="nav-link" href="/flights">Flights</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
-          </li>
+          
         </ul>
         <ul class="navbar-nav" id="link">
           {% if user.is_authenticated %}
           <li id="button-link" class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}"
-              >Sign Out</a
-            >
+            <a class="nav-link" href="{% url 'logout' %}">Sign Out</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" style="text-decoration: none" href="{% url 'login' %}">Sign In</a
+            <a
+              class="nav-link"
+              style="text-decoration: none"
+              href="{% url 'login' %}"
+              >Sign In</a
             >
           </li>
           <li id="button-link" class="nav-item">
@@ -128,6 +128,154 @@
     </nav>
 
     {% block content %} {% endblock content %}
+
+    <div class="choose">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="choose_box">
+              <div class="titlepage text-justify-left">
+                <h2>
+                  <span class="text_norlam">Bored in Quarantine</span>
+                  <br />Plane a Gataway
+                </h2>
+              </div>
+              <p>
+                Getaway is a perfect place for you to place your trips. We help
+                you find cheapest and covid safe travel journies
+              </p>
+              <a class="book_btn" href="hotels/">Hotels</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="img_box">
+                  <figure>
+                    <img src="{% static 'images/big1.jpg' %}" alt="#" />
+                  </figure>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="img_box">
+                  <figure>
+                    <img src="{% static 'images/big2.jpg' %}" alt="#" />
+                  </figure>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="img_box">
+                  <figure>
+                    <img src="{% static 'images/big3.jpg' %}" alt="#" />
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+<!--=========================== Reviews ==========================-->
+
+
+<div class="container" style="padding-top:80px">
+<div class="titlepage text-justify-left">
+                <h2>
+                  
+                  <br />Comments
+                </h2>
+              </div>
+</div>
+
+
+<div class="container" style="padding-top:30px">
+    <div class="row">
+        <div class="col-md-12 offset-md-12">
+            <div class="card card-info">
+                <div class="card-block">
+
+                <!--=========================== This is the Form for comment ==========================-->
+                    
+                    <form action="" class="form-inline" id="comment">
+                    <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea" name="comment" id="comment"></textarea>
+                        
+                        <button  class="book_btn float-xs-right" type="button">Share</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" style="padding-top:20px">
+<div class="row d-flex justify-content-center mt-100 mb-100">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body text-left">
+                
+                <h4>     
+                  Latest Comments
+                </h4>
+              
+            </div>
+            <div class="comment-widgets">
+                
+                
+
+                <!--========== This is reusable part USE FOR LOOP HERE  ==============-->
+
+                <div class="d-flex flex-row comment-row m-t-0">
+                    <div class="p-2"></div>
+                    <div class="comment-text w-100">
+                        <h6 class="font-medium">Rohan Mishra</h6> <span class="m-b-15 d-block">This is awesome website. I would love to comeback again. </span>
+                        <div class="comment-footer"> <span class="text-muted float-right">july 14, 2020</span>  </div>
+                    </div>
+                </div> 
+                <!-- ============First comment ends here============-->
+
+
+                <!-- ============second comment starts here============-->
+                <div class="d-flex flex-row comment-row ">
+                    <div class="p-2"></div>
+                    <div class="comment-text w-100">
+                        <h6 class="font-medium">Arjun Bharat</h6> <span class="m-b-15 d-block">This helped me a lot during my trip planning. Top notch website </span>
+                        <div class="comment-footer"> <span class="text-muted float-right">April 14, 2019</span>  </div>
+                    </div>
+                </div>
+                <!-- ============second comment ends here============-->
+                </div> 
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div style="padding-top: 100px;">
+    <div class="footer" >
+      <p style="padding-top: 10px;">Getaway - one place for all your travel needs.</p>
+    </div>
+    </div>
+
+
+
+
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

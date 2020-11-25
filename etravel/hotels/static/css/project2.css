@@ -388,3 +388,73 @@ h2 small {
   position: absolute;
   z-index: 2;
 }
+
+.choose {
+  margin-top: 90px;
+}
+
+.choose_box {
+  padding-top: 76px;
+}
+
+.choose_box .titlepage {
+  text-align: left;
+  padding-bottom: 35px;
+}
+
+.text_norlam {
+  font-weight: normal;
+}
+
+.choose_box p {
+  font-size: 17px;
+  line-height: 36px;
+  color: #313131;
+  padding: 0px 0px 45px 0px;
+}
+
+.img_box {
+  margin-bottom: 30px;
+}
+
+.img_box figure {
+  margin: 0;
+}
+
+.img_box figure img {
+  width: 100%;
+}
+
+.titlepage h2 {
+  font-size: 55px;
+  color: #313131;
+  line-height: 60px;
+  font-weight: bold;
+  padding: 0;
+  text-align: left;
+}
+
+.carousel-inner img {
+  width: 100%;
+}
+
+.footer {
+  padding-top: 100px;
+  text-align: center;
+  padding: 3px;
+  background-color: #5c5757;
+  color: white;
+}
+
+.pb-cmnt-container {
+  font-family: Lato;
+  margin-top: 100px;
+}
+
+.pb-cmnt-textarea {
+  resize: none;
+  padding: 20px;
+  height: 130px;
+  width: 100%;
+  border: 1px solid #f2f2f2;
+}
