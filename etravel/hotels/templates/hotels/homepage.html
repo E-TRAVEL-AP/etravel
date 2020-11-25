@@ -43,9 +43,15 @@
             <div >
               <div class="form-group"></form>
                 <span class="form-label">Your Destination</span>
-                <input class="book_n" type="text" name="Origin" id="origin"  placeholder="Enter The Destination" required autofocus />
+                <hr onmouseover="clearSearch()"> 
+                <input class="book_n" type="text" name="Origin" id="origin"  onkeyup="myFunction3()" placeholder="{{ origin }}" required autofocus />
+              <ul id="myTable1" >
+                {% for location in location_name %}
+                <li class="list-group-item origin_list" data-location = "{{location}}">{{location}}</li> 
+                {% endfor %}
+              </ul>      
               </div>
-              <div class="row">
+              <div class="row" onmouseover="clearSearch()">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <span class="form-label">Check In</span>
@@ -90,23 +96,39 @@
               </div>
               </div>
             </form>
+            
     </div>
     <div id="menu1" class="container tab-pane fade"><br>
       
 	  <form action="flights/" method="POST" id="form_id">
         {% csrf_token %}
-              <div class="row">
-          <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6">
               <label class="date">From</label>
-              <input class="book_n" type="text" name="Origin" id="inputOrigin"  placeholder="Enter a place of origin" required autofocus />
-            </div>
+              <hr onmouseover="clearSearch()">
+              <input class="book_n" type="text" name="Origin" id="inputOrigin"  onkeyup="myFunction1()" placeholder="{{ origin }}" required autofocus />
+              <ul id="myTable1" >
+
+                {% for location in location_name %}
+                <li class="list-group-item origin_list" onclick="origin_select()" data-location = "{{location}}">{{location}}</li> 
+                {% endfor %}
+              </ul>           
+              </div>
 
             <div class="col-md-6">
               <label class="date">Destination</label>
-              <input class="book_n" type="text" placeholder="Enter a destination" name="Destination" id="inputDestination" required autofocus />
+              <hr onmouseover="clearSearch()">
+              <input class="book_n" type="text" placeholder="{{ destination }}" onkeyup="myFunction2()" name="Destination" id="inputDestination" required autofocus />
+              <ul id="myTable2" >
+
+                {% for location in location_name %}
+                <li class="list-group-item dest_list" data-location = "{{location}}">{{location}}</li> 
+                {% endfor %}
+              </ul>    
             </div>
-            </div>
-              <div class="row" style="padding-top:20px;">
+          </div>
+          
+              <div class="row" style="padding-top:20px;" onmouseover="clearSearch()">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <span class="form-label">Check In</span>
@@ -163,5 +185,88 @@
     </div>
   </div>
 </div>
-
+<script>
+  function clearSearch() {
+      li = document.getElementsByClassName("origin_list");
+      for (i = 0; i < li.length; i++) {  
+          li[i].style.display="none";
+      }
+      li1 = document.getElementsByClassName("dest_list");
+      for (i = 0; i < li1.length; i++) {  
+          li1[i].style.display="none";
+      }
+  }
+  function myFunction1() {
+    // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("inputOrigin");
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myTable1");
+      li = document.getElementsByClassName("origin_list");
+      
+    // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < li.length; i++) 
+          {                
+          txtValue = li[i].textContent && li[i].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) 
+              {
+                  li[i].style.display = "";
+              } 
+          else 
+          {
+              li[i].style.display = "none";
+          }
+          }  
+          }
+  
+  
+   
+    
+  function myFunction2() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("inputDestination");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myTable2");
+  li = document.getElementsByClassName("dest_list");
+  
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) 
+      {                
+      txtValue = li[i].textContent && li[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) 
+          {
+              li[i].style.display = "";
+          } 
+      else 
+      {
+          li[i].style.display = "none";
+      }
+      }  
+      }
+      
+      function myFunction3() {
+        // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("origin");
+          filter = input.value.toUpperCase();
+          ul = document.getElementById("myTable1");
+          li = document.getElementsByClassName("origin_list");
+          
+        // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < li.length; i++) 
+              {                
+              txtValue = li[i].textContent && li[i].innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) 
+                  {
+                      li[i].style.display = "";
+                  } 
+              else 
+              {
+                  li[i].style.display = "none";
+              }
+              }  
+              }
+      
+  </script>
 {% endblock content %}

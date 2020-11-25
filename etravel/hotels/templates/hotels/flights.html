@@ -8,7 +8,7 @@
         <form action="" class="form_book" method="POST" id="form_id">
         {% csrf_token %}
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label class="date">From</label>
               <hr onmouseover="clearSearch()">
               <input class="book_n" type="text" name="Origin" id="inputOrigin"  onkeyup="myFunction1()" placeholder="{{ origin }}" required autofocus />
@@ -19,9 +19,8 @@
                 {% endfor %}
               </ul>           
               </div>
-            </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label class="date">Destination</label>
               <hr onmouseover="clearSearch()">
               <input class="book_n" type="text" placeholder="{{ destination }}" onkeyup="myFunction2()" name="Destination" id="inputDestination" required autofocus />
@@ -159,11 +158,6 @@ for (i = 0; i < li.length; i++)
     }  
     }
     
-    org_item = document.getElementsByClassName("origin_list")
-    for(var i = 0; i< org_item.length; i++){
-      org_item[i].addEventListener('click', function(){
-        var org = document.getElementById("inputOrigin")
-        org.innerHTML = this.dataset.location
-  })}
+   
 </script>
 {%endblock content %}
