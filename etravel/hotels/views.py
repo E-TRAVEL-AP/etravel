@@ -21,7 +21,8 @@ from iata_codes import IATACodesClient
 
 
 
-
+locations = ["PUNE (PNQ)", "NEW DELHI (DEL)", "MUMBAI (BOM)", "LONDON (LON)", "BANGKOK (BKK)", "SYDNEY (SYD)", "NEW YORK CITY(NYC)", "PARIS (PAR)"]
+codes = ["PNQ", "DEL", "BOM", "LON", "BKK", "SYD", "NYC", "PAR"]
 #################################################
 #API KEYS
 
@@ -35,7 +36,10 @@ amadeus = Client(client_id='t7HkaagNkZgxjG30TXfpjtmWQKRXO0U3',
 #######################################################################################################################################
 
 def homepage(request):
-    return render(request, 'hotels/homepage.html')
+    location_name = locations
+   
+
+    return render(request, 'hotels/homepage.html',  {'location_name': location_name})
 
 #######################################################################################################################################
 
@@ -48,19 +52,23 @@ def hotels(request):
     origin = request.POST.get('Origin')
     departureDate = request.POST.get('Departuredate')
     returnDate = request.POST.get('Returndate')
-    hotel_images = ["../../static/images/hotel1.jpg", "../../static/images/hotel2.jpg","../../static/images/hotel3.jpg","../../static/images/hotel4.jpg","../../static/images/hotel5.jpg","../../static/images/hotel6.jpg","../../static/images/hotel7.jpg","../../static/images/hotel8.jpg","../../static/images/hotel9.jpg", "../../static/images/hotel10.jpg"]
+    hotel_images = ["../../static/images/hotel1.jpg", "../../static/images/hotel2.jpg","../../static/images/hotel3.jpg","../../static/images/hotel4.jpg","../../static/images/hotel5.jpg","../../static/images/hotel6.jpg","../../static/images/hotel7.jpg","../../static/images/hotel8.jpg","../../static/images/hotel9.jpg", "../../static/images/hotel10.jpg", "../../static/images/hotel11.jpg", "../../static/images/hotel12.jpg", "../../static/images/hotel13.jpg", "../../static/images/hotel14.jpg", "../../static/images/hotel15.jpg", "../../static/images/hotel16.jpg"]
 
 
 
     kwargs = {'cityCode': origin,
               }
     
-    location_name = ["PUNE (PNQ)", "NEW DELHI (DEL)", "MUMBAI (BOM)", "LONDON (LON)", "BANGKOK (BKK)", "SYDNEY (SYD)"]
-    codes = ["PNQ", "DEL", "BOM", "LON", "BKK", "SYD"]
+    location_name = locations
+    #codes = ["PNQ", "DEL", "BOM", "LON", "BKK", "SYD"]
     hotelResult = []
     if origin and departureDate and returnDate:
         kwargs['cityCode'] = kwargs['cityCode'].upper()
         
+        o = kwargs['cityCode']
+        for i in range(len(location_name)):    
+            if o == location_name[i]:
+                 kwargs['cityCode'] = codes[i]
         try:
             response = amadeus.shopping.hotel_offers.get(**kwargs)
             hotelsjason = response.data
@@ -136,9 +144,7 @@ def flights(request):
               'adults': adults
               }
 
-    location_name = ["PUNE (PNQ)", "NEW DELHI (DEL)", "MUMBAI (BOM)", "LONDON (LON)", "BANGKOK (BKK)", "SYDNEY (SYD)"]
-    codes = ["PNQ", "DEL", "BOM", "LON", "BKK", "SYD"]
-    
+    location_name = locations
 
     data = amadeus.reference_data.locations.get(keyword=request.GET.get('{origin}', None),
                                                     subType=Location.ANY).data
@@ -167,6 +173,7 @@ def flights(request):
             for flight in flightsjason:
 
                 price = flight['price']['total']
+
                 
                 flightID = flight['id']
                 searchedFlight = []
