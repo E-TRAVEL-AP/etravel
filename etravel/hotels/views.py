@@ -52,7 +52,10 @@ def hotels(request):
     origin = request.POST.get('Origin')
     departureDate = request.POST.get('Departuredate')
     returnDate = request.POST.get('Returndate')
-    hotel_images = ["../../static/images/hotel1.jpg", "../../static/images/hotel2.jpg","../../static/images/hotel3.jpg","../../static/images/hotel4.jpg","../../static/images/hotel5.jpg","../../static/images/hotel6.jpg","../../static/images/hotel7.jpg","../../static/images/hotel8.jpg","../../static/images/hotel9.jpg", "../../static/images/hotel10.jpg", "../../static/images/hotel11.jpg", "../../static/images/hotel12.jpg", "../../static/images/hotel13.jpg", "../../static/images/hotel14.jpg", "../../static/images/hotel15.jpg", "../../static/images/hotel16.jpg","../../static/images/big1.jpg","../../static/images/big2.jpg","../../static/images/big3.jpg"]
+    adults = request.POST.get('adults')
+    children = request.POST.get('children')
+    
+    hotel_images = ["../../static/images/hotel1.jpg", "../../static/images/hotel2.jpg","../../static/images/hotel3.jpg","../../static/images/hotel4.jpg","../../static/images/hotel5.jpg","../../static/images/hotel6.jpg","../../static/images/hotel7.jpg","../../static/images/hotel8.jpg","../../static/images/hotel9.jpg", "../../static/images/hotel10.jpg", "../../static/images/hotel11.jpg", "../../static/images/hotel12.jpg", "../../static/images/hotel13.jpg", "../../static/images/hotel14.jpg", "../../static/images/hotel15.jpg", "../../static/images/hotel16.jpg"]
 
 
 
@@ -94,21 +97,29 @@ def hotels(request):
 
                 
                 try:
-                    description = hotel['hotel']['description']['text']
-                    description = (description[:125] + '...') if len(description) > 75 else description
+                    descriptionFull = hotel['hotel']['description']['text']
+                    description = (descriptionFull[:125] + '...') if len(descriptionFull) > 75 else descriptionFull
                 except:
-                    description = "This is covide friendly Hotel with the amenities. Please visit!"
+                    description = "This is covid friendly Hotel with the amenities. Please visit!"
+                    descriptionFull = description 
                 address = hotel['hotel']['address']['lines']
 
-                 
-                searchedFlight = {'price': price,'name':name, 'hotelID': hotelID, 'distance': distance, 'hotelImg': hotelImg, 'description': description,  'address': address, 'Covid':Covid, 'Parking':Parking, 'Heritage':Heritage, 'Pool':Pool, 'Gym':Gym, 'HotBath':HotBath}    
+                adults = int(adults)
+                children = int(children)
+                people = adults + children
+                rooms = int(people/3 - 0.01) + 1
+                totalPrice = rooms*(float(price))
+                totalPrice = round(totalPrice, 2)
+                searchedFlight = {'price': price, 'rooms': rooms, 'totalPrice': totalPrice, 'price': price, 'name':name, 'hotelID': hotelID, 'distance': distance, 'hotelImg': hotelImg, 'description': description, 'descriptionFull': descriptionFull,  'address': address, 'Covid':Covid, 'Parking':Parking, 'Heritage':Heritage, 'Pool':Pool, 'Gym':Gym, 'HotBath':HotBath}    
                 hotelResult.append(searchedFlight)
             
             print(hotelResult)
+            
             return render(request, 'hotels/hotels.html', {'hotelResult': hotelResult,
                                                          'origin': origin.upper(),
                                                          'departureDate': departureDate,
                                                          'returnDate': returnDate,
+                                                         'people': people,
                                                          'location_name': location_name,})
         except ResponseError as error:
             messages.add_message(request, messages.ERROR, error)
@@ -131,7 +142,9 @@ def flights(request):
     destination = request.POST.get('Destination')
     departureDate = request.POST.get('Departuredate')
     returnDate = request.POST.get('Returndate')
-    adults = request.POST.get('Adults')
+    adults = (request.POST.get('adults'))
+    children = (request.POST.get('children'))
+    
 
     flightResults = []
 
@@ -222,14 +235,20 @@ def flights(request):
                         numberofStops = 0
 
                     index += 1
-                   
-                searchedFlight = {'airlineCarrier':airlineCarrier, 'DepartureTime': DepartureDate, 'Duration': Duration, 'ArrivalTime': ArrivalDate, 'numberofStops': numberofStops, 'price': price, 'flightID': flightID, 'availableseats':availableseats}    
+                adults = int(adults)
+                children = int(children)
+                price1 = float(price)
+                totalPrice = adults*price1 + 0.67*children*price1  
+                totalPrice = round(totalPrice, 2) 
+                searchedFlight = {'airlineCarrier':airlineCarrier, 'DepartureTime': DepartureDate, 'Duration': Duration, 'ArrivalTime': ArrivalDate, 'numberofStops': numberofStops, 'price': price, 'totalPrice': totalPrice, 'flightID': flightID, 'availableseats':availableseats}    
                 flightResults.append(searchedFlight)
-            
+        
             return render(request, 'hotels/flights.html', {'flightResults':flightResults,'origin': origin.upper(),
                                                      'destination': destination.upper(),
                                                      'departureDate': departureDate,
                                                      'returnDate': returnDate,
+                                                     'adults': adults,
+                                                     'children': children,
                                                      'location_name' : location_name,})
         except ResponseError as error:
             messages.add_message(request, messages.ERROR, error)

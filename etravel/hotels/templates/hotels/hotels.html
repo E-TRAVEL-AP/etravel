@@ -9,7 +9,8 @@
         {% csrf_token %}
           <div class="row">
 
-          <div class="col-md-3">
+
+            <div class="col-md-3">
               <label class="date">Your Destination</label>
               <input class="book_n" type="text" name="Origin" id="origin"  onkeyup="myFunction1()" placeholder="{{ origin }}" required autofocus />
               <ul id="myTable1" >
@@ -19,7 +20,7 @@
                 {% endfor %}
               </ul>      
             </div>
-            
+          
             <div class="col-md-3">
               <label class="date">ARRIVAL DATE</label>
               <input class="book_n" type="date" name="Departuredate" id="idDeparturedate" required>
@@ -28,11 +29,36 @@
               <label class="date">DEPARTURE DATE</label>
               <input class="book_n" type="date" name="Returndate" id="idReturndate" required />
             </div>
-            
+          </div>            
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <span class="form-label" >Adults</span>
+                  <select class="book_n" name="adults" id="adults">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                  </select>
+                  <span class="select-arrow"></span>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <span class="form-label" >Children</span>
+                  <select class="book_n" name="children" id="children">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                  <span class="select-arrow"></span>
+                </div>
+                </div>
             <div class="col-md-3">
               <button class="book_btn" type="Submit" name="Submit" value="Submit">Book Now</button>
             </div>
           </div>
+          
+        
         </form>
       </div>
     </div>
@@ -44,7 +70,55 @@
    <div class="container" id = "hotelsboxes">
     <div class="paddingsbottom">
       {% for hotel in hotelResult %} 
-
+      <!--Code for pop up box giving product details-->
+    <div class="popup" id="popup-1">
+      <div class ="overlay"></div>
+      <div class="content">
+          <div class="close-btn" onclick="togglePopup()">&times;</div>
+          <h2 > {{hotel.name}} <hr></h2 >
+            <img
+            src={{hotel.hotelImg}}
+            alt="Image"
+            style="width:300px; height:auto; align:center"
+            ><br>
+            {% if Covid %}
+          <span class="badge badge-info">Covid Safe</span>
+          {% endif %}
+          
+          <span class="badge badge-dark">AC</span>
+          
+          {% if hotel.Parking %}
+          <span class="badge badge-success">Parking Available</span>
+          {% endif %}
+          {% if hotel.Heritage %}
+          <span class="badge badge-warning"> Heritage</span>
+          {% endif %}
+          {% if hotel.Pool %}
+          <span class="badge badge-danger">Pool</span>
+          {% endif %}
+          {% if hotel.Gym %}
+          <span class="badge badge-primary">Gym</span>
+          {% endif %}
+          {% if hotel.HotBath %}
+          <span class="badge badge-success">Hot Bath</span>
+          {% endif %}
+            <br>IAIA code of Hotel's city:  <strong>{{origin}}</strong>
+            <br><strong>Description : </strong> {{hotel.description}}
+          <hr/>
+          
+          <div id="popup_price">'<h4 style="display: inline-block;">Total Bill: ${{hotel.totalPrice}}</h4>(You need {{hotel.rooms}} rooms for {{people}} people.)</div>
+          <hr>
+          <div id="popup_buttons">
+            {%if user.is_authenticated%}
+              <button class="btn btn-warning" onclick="togglePopup()" href="{% url 'homepage' %}">BOOK NOW!!</button>
+            {%else%}
+              <button class="btn btn-success" onclick="togglePopup()" href="{% url 'login' %}">Please login!</button>
+            {%endif%}
+          </div>
+          
+      </div>
+  </div>
+  <!--End-->
       <div class="hoteladjusting">
         <img
           src={{hotel.hotelImg}}
@@ -80,14 +154,15 @@
           {% endif %}
 
         </div>
-        <a href="#" class="pricecontainer pricecontainer2 pricecontainer3" style="text-decoration: none !important;";>
+        <a onclick="togglePopup()" class="pricecontainer pricecontainer2 pricecontainer3" style="text-decoration: none !important;";>
           <p style="color: #f8f8f8;
   font-size: 1.6rem;
   font-weight: 600;">${{hotel.price}}</p>
           <p style="color: #f8f8f8;
   font-size: 0.8rem;
   font-weight: 600;
-  text-transform: uppercase;">Book</p>
+  text-transform: uppercase;"
+ >Book</p>
         </a>
       </div>
       {% endfor %}
@@ -130,7 +205,9 @@ function myFunction1() {
         }  
         }
 
-
+        function togglePopup(){           
+          document.getElementById("popup-1").classList.toggle("active");           
+      } 
 </script>
 
 
