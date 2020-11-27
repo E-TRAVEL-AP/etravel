@@ -352,6 +352,10 @@ h2 small {
 .responsive-table .col-7 {
   flex-basis: 17%;
 }
+
+.responsive-table .col-custom {
+  flex-basis: 50%;
+}
 @media all and (max-width: 767px) {
   .responsive-table .table-header {
     display: none;

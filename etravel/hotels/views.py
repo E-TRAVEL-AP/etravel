@@ -11,7 +11,6 @@ from django.conf import settings
 from django.core.mail import send_mail 
 from django.contrib.auth.models import User
 import random
-from . import fakeHotels
 #For API
 from amadeus import Client, ResponseError, Location
 import json
@@ -350,3 +349,14 @@ def login_request(request):
 
 #######################################################################################################################################
 
+def profile(request):
+    
+    if request.user.is_authenticated:
+        user = request.user.get_username().capitalize() 
+        name = request.user.get_full_name().capitalize()
+        id = random.randint(2000,5000)
+        
+        return render(request, "hotels/profile.html", {'user':user, 'name':name, 'id':id})     
+    
+
+    return render(request, "hotels/profile.html", {})

@@ -9,8 +9,6 @@ urlpatterns = [
     path('logout/', views.logout_request, name="logout"),
     path('hotels/', views.hotels, name="hotels"),
     path('flights/', views.flights, name="flights"),
-   
-
-    
+    path('profile/', views.profile, name="profile"),
     
 ]
