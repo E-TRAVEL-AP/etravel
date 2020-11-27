@@ -75,39 +75,16 @@
       <div class ="overlay"></div>
       <div class="content">
           <div class="close-btn" onclick="togglePopup()">&times;</div>
-          <h2 > {{hotel.name}} <hr></h2 >
-            <img
-            src={{hotel.hotelImg}}
-            alt="Image"
-            style="width:300px; height:auto; align:center"
-            ><br>
-            {% if Covid %}
-          <span class="badge badge-info">Covid Safe</span>
-          {% endif %}
-          
-          <span class="badge badge-dark">AC</span>
-          
-          {% if hotel.Parking %}
-          <span class="badge badge-success">Parking Available</span>
-          {% endif %}
-          {% if hotel.Heritage %}
-          <span class="badge badge-warning"> Heritage</span>
-          {% endif %}
-          {% if hotel.Pool %}
-          <span class="badge badge-danger">Pool</span>
-          {% endif %}
-          {% if hotel.Gym %}
-          <span class="badge badge-primary">Gym</span>
-          {% endif %}
-          {% if hotel.HotBath %}
-          <span class="badge badge-success">Hot Bath</span>
-          {% endif %}
-            <br>IAIA code of Hotel's city:  <strong>{{origin}}</strong>
-            <br><strong>Description : </strong> {{hotel.description}}
+          <h2 id="hotel_name"> {{hotel.name}} <hr></h2 >
+            <div id="hotel_image"></div>
+            <br>
+            <br><strong>IAIA code of Hotel's city:  {{origin}}</strong>
+            <br>
+            <br>
+            <br><strong>Description : </strong> <span id="hotel_description"></span>
           <hr/>
           
-          <div id="popup_price">'<h4 style="display: inline-block;">Total Bill: ${{hotel.totalPrice}}</h4>(You need {{hotel.rooms}} rooms for {{people}} people.)</div>
-          <hr>
+          <div id="popup_price">'<h4 style="display: inline-block;">Total Bill: $<span id="total_price"></span></h4>(You need {{hotel.rooms}} rooms for {{people}} people.)</div>
           <div id="popup_buttons">
             {%if user.is_authenticated%}
               <button class="btn btn-warning" onclick="togglePopup()" href="{% url 'homepage' %}">BOOK NOW!!</button>
@@ -126,7 +103,7 @@
           style="width:400px;"
         />
         <div class="hotelDescription">
-          <h3 class="hotelname">{{hotel.name}}</h3>
+          <h3 id="hotel_name">{{hotel.name}}</h3>
           <p >{{origin}}</p>
           <p >
             {{hotel.description}}
@@ -154,7 +131,12 @@
           {% endif %}
 
         </div>
-        <a onclick="togglePopup()" class="pricecontainer pricecontainer2 pricecontainer3" style="text-decoration: none !important;";>
+        <a onclick="togglePopup()"
+        data-hotel_name="{{hotel.name}}"
+        data-hotel_image="{{hotel.hotelImg}}"
+        data-hotel_description="{{hotel.descriptionFull}}"
+        data-hotel_price="{{hotel.totalPrice}}"
+        class="pricecontainer pricecontainer2 pricecontainer3 pop_button" style="text-decoration: none !important;";>
           <p style="color: #f8f8f8;
   font-size: 1.6rem;
   font-weight: 600;">${{hotel.price}}</p>
@@ -204,6 +186,37 @@ function myFunction1() {
         }
         }  
         }
+
+        var updatePop= document.getElementsByClassName('pop_button')
+
+        for(var i = 0; i< updatePop.length; i++){
+        updatePop[i].addEventListener('click', function(){
+          var hotel_name = this.dataset.hotel_name
+          var hotel_image = this.dataset.hotel_image
+          var hotel_description = this.dataset.hotel_description
+          var hotel_price = this.dataset.hotel_price
+
+          image_location = document.getElementById('hotel_image')
+          name_location = document.getElementById('hotel_name')
+          description_location =  document.getElementById('hotel_description')
+          price_location = document.getElementById('total_price')
+          
+          name_location.innerHTML = hotel_name
+          
+          var img = document.createElement("img");
+          img.src = hotel_image;
+          img.style.width = "40%";
+          img.style.minWidth = "210px";
+          img.style.height = "45%";
+          img.style.minHeight = "230px";
+          img.style.float = "left";
+          img.style.padding = "10px";
+          image_location.innerHTML = "";
+          image_location.appendChild(img)
+
+          description_location.innerHTML = hotel_description
+          price_location.innerHTML = hotel_price
+        })}
 
         function togglePopup(){           
           document.getElementById("popup-1").classList.toggle("active");           
