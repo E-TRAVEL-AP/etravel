@@ -54,6 +54,7 @@ def hotels(request):
     returnDate = request.POST.get('Returndate')
     adults = request.POST.get('adults')
     children = request.POST.get('children')
+    people= 0
     
     hotel_images = ["../../static/images/hotel1.jpg", "../../static/images/hotel2.jpg","../../static/images/hotel3.jpg","../../static/images/hotel4.jpg","../../static/images/hotel5.jpg","../../static/images/hotel6.jpg","../../static/images/hotel7.jpg","../../static/images/hotel8.jpg","../../static/images/hotel9.jpg", "../../static/images/hotel10.jpg", "../../static/images/hotel11.jpg", "../../static/images/hotel12.jpg", "../../static/images/hotel13.jpg", "../../static/images/hotel14.jpg", "../../static/images/hotel15.jpg", "../../static/images/hotel16.jpg"]
 

@@ -104,10 +104,8 @@
     </li>
 
       
-    {%for r in flightResults%}
-    
-    <!--Code for pop up box giving product details-->
-    <div class="popup" id="popup-1">
+     <!--Code for pop up box giving product details-->
+     <div class="popup" id="popup-1">
       <div class ="overlay"></div>
       <div class="content">
           <div class="close-btn" onclick="togglePopup()">&times;</div>
@@ -115,15 +113,15 @@
           <h5 id="popup_title">Interval:{{ returnDate }}
             {% if returnDate %} <span class="text-info">&#10594&#10596</span> {{ departureDate }}{% endif %}</h5>
           <hr>
-            <p> This is a flight scheduled by <strong>{{r.airlineCarrier}}</strong></p> 
-            <p>Flight ID:<strong>{{r.flightID}}</strong></p>
-            <p>Departure Time:<strong>{{r.DepartureTime}}</strong></p>
-            <p>Arrival Time:<strong>{{r.ArrivalTime}}</strong></p> 
-            <p>Duration:<strong>{{r.Duration}}</strong></p>
-            <p>Available Seats:<strong>{{r.availableseats}}</strong></p>
+            <p> This is a flight scheduled by <strong id="popup_airline"></strong></p> 
+            <p>Flight ID:<strong id="popup_flightID"></strong></p>
+            <p>Departure Time:<strong id="popup_depTime"></strong></p>
+            <p>Arrival Time:<strong id="popup_ArrTime"></strong></p> 
+            <p>Duration:<strong id="popup_duration"></strong></p>
+            <p>Available Seats:<strong id="popup_avSeats"></strong></p>
           <hr/>
           
-          <div id="popup_price">'<h4 style="display: inline-block;">Total Bill: ${{r.totalPrice}}</h4>(You are booking for {{adults}} adults and {{children}} children.)</div>
+          <div id="popup_price">'<h4 style="display: inline-block;">Total Bill: $<span id="popup_totalPrice"></span></h4>(You are booking for {{adults}} adults and {{children}} children.)</div>
           
           <div id="popup_buttons">
             {%if user.is_authenticated%}
@@ -136,6 +134,10 @@
       </div>
   </div>
   <!--End-->
+    
+    {%for r in flightResults%}
+    
+   
 
 
     <li class="table-row">
@@ -148,13 +150,14 @@
       <div class="col col-5" data-label="Price">${{r.price}}</div>
       <div class="col col-6" data-label="Price">{{r.availableseats}}</div>
       <div class="col col-7" data-label="Book">
-        <button class="pop_book"
+        <button class="btn btn-primary pop_button"
         data-airline="{{r.airlineCarrier}}"
+        data-flightID = "{{r.flightID}}"
         data-departureTime = "{{r.DepartureTime}}"
         data-arrivalTime = "{{r.ArrivalTime}}"
         data-duration = "{{r.Duration}}"
-        data-price = "{{r.price}}"
-        data-availableSeats = {{r.availableseats}}
+        data-totalPrice = "{{r.totalPrice}}"
+        data-availableSeats = "{{r.availableseats}}"
         onclick="togglePopup()">Book</button>
       </div>
     
@@ -224,40 +227,37 @@ for (i = 0; i < li.length; i++)
     }
     }  
     }
-    
-    var updatePop= document.getElementsByClassName('pop_book')
+
+    var updatePop= document.getElementsByClassName('pop_button')
 
     for(var i = 0; i< updatePop.length; i++){
     updatePop[i].addEventListener('click', function(){
-      var airline=this.dataset.airline
-      var departureTime = this.dataset.departureTime
-      var arrivalTime = this.dataset.arrivalTime
-      var duration = this.dataset.duration
-      var price = this.dataset.price
-      var availableSeats = this.dataset.availableSeats
-  
-        description_location = document.getElementById('popup_description')
-        price_location = document.getElementById('popup_price')
-        
-    
-        document.getElementById("popup_title").innerHTML =  productName ;
-    
-        description_location.innerHTML = '<p> This is a flight scheduled by <strong>' + airline + '</strong></p> \
-        <p>Departure Time:<strong>' + departureTime + '</strong></p> <p>\
-        <p>Arrival Time:<strong>' + arrivalTime + '</strong></p> <p>\
-        <p>Duration:<strong>' + duration + '</strong></p> <p>\
-        <p>Available Seats:<strong>' + availableSeats + '</strong></p> <p>\
-        ' 
+    var airline = this.dataset.airline
+    var departureTime = this.dataset.departuretime
+    var flightID = this.dataset.flightid
+    var arrivalTime = this.dataset.arrivaltime
+    var availableSeats = this.dataset.availableseats
+    var duration = this.dataset.duration
+    var totalPrice = this.dataset.totalprice
 
-         
-        add_cart_location.innerHTML = this.dataset.cart_button
-    
-        price_location.innerHTML = '<h4 style="display: inline-block; float:right">Price: <strong>$' + price + '</strong></h4>'
-    
-            })}
-    
-            function togglePopup(){           
-                document.getElementById("popup-1").classList.toggle("active");           
-            }  
+    var airline_location = document.getElementById('popup_airline')
+    var airlineDep_location = document.getElementById('popup_depTime')
+    var flightID_location = document.getElementById('popup_flightID')
+    var airlineArr_location = document.getElementById('popup_ArrTime')
+    var duration_location = document.getElementById('popup_duration')
+    var avSeats_location = document.getElementById('popup_avSeats')
+    var totalPrice_location = document.getElementById('popup_totalPrice')
+
+    airline_location.innerHTML = airline
+    airlineDep_location.innerHTML = departureTime
+    flightID_location.innerHTML = flightID
+    airlineArr_location.innerHTML = arrivalTime
+    avSeats_location.innerHTML = availableSeats
+    duration_location.innerHTML = duration
+    totalPrice_location.innerHTML = totalPrice
+    })}
+function togglePopup(){           
+    document.getElementById("popup-1").classList.toggle("active");           
+}  
 </script>
 {%endblock content %}
