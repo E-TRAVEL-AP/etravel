@@ -352,11 +352,15 @@ def login_request(request):
 def profile(request):
     
     if request.user.is_authenticated:
+
+        userId = request.user.id
+        Currentuser = User.objects.get(id=userId)
+        email = Currentuser.email        
         user = request.user.get_username().capitalize() 
         name = request.user.get_full_name().capitalize()
         id = random.randint(2000,5000)
         
-        return render(request, "hotels/profile.html", {'user':user, 'name':name, 'id':id})     
+        return render(request, "hotels/profile.html", {'user':user, 'name':name, 'id':id, 'email':email})     
     
 
     return render(request, "hotels/profile.html", {})
