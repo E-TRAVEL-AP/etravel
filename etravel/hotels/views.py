@@ -98,6 +98,7 @@ def hotels(request):
                 
                 try:
                     descriptionFull = hotel['hotel']['description']['text']
+                    descriptionFull = (descriptionFull[:1000] + '...') if len(descriptionFull) > 75 else descriptionFull
                     description = (descriptionFull[:125] + '...') if len(descriptionFull) > 75 else descriptionFull
                 except:
                     description = "This is covid friendly Hotel with the amenities. Please visit!"
